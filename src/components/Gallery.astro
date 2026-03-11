@@ -11,185 +11,143 @@ const sketches = [
 ];
 ---
 
-<!-- Scroll-Hijack Horizontal Gallery -->
-<section id="gallery" class="relative">
-	<!-- Header pinned -->
-	<div class="px-6 md:px-12 pt-32 pb-12">
-		<p class="text-[11px] uppercase tracking-[0.5em] text-white/30 mb-4">Selected Works</p>
-		<h2 class="text-4xl md:text-6xl font-bold">Gallery</h2>
-	</div>
-
-	<!-- This outer wrapper's height drives the scroll distance -->
-	<div class="gallery-scroll-outer" id="gallery-outer">
-		<!-- Sticky container stays pinned while outer scrolls -->
-		<div class="sticky top-0 h-screen overflow-hidden" id="gallery-sticky">
-			<!-- Horizontal track that translates left -->
-			<div class="flex items-center h-full" id="gallery-track">
-				<div class="flex gap-6 md:gap-8 pl-6 md:pl-12 pr-[50vw]">
-					{sketches.map((sketch) => (
-						<div class="group relative flex-shrink-0 w-[75vw] sm:w-[50vw] md:w-[35vw] lg:w-[28vw] h-[70vh] cursor-pointer">
-							<div class="relative w-full h-full overflow-hidden rounded-xl bg-white/5">
-								<img src={sketch.image} alt={sketch.title}
-									class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-									loading="lazy" />
-								<!-- Gradient overlay -->
-								<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-								<!-- Hover overlay -->
-								<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-								<!-- Info -->
-								<div class="absolute bottom-0 left-0 right-0 p-6 md:p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-									<p class="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2">{sketch.category}</p>
-									<p class="text-xl md:text-2xl font-['Playfair_Display',serif]">{sketch.title}</p>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-
-			<!-- Progress bar at bottom -->
-			<div class="absolute bottom-8 left-6 right-6 md:left-12 md:right-12">
-				<div class="h-[2px] bg-white/10 rounded-full overflow-hidden">
-					<div class="h-full bg-white/50 rounded-full transition-none" id="gallery-progress" style="width: 0%"></div>
-				</div>
-				<div class="flex justify-between mt-3">
-					<p class="text-[10px] uppercase tracking-[0.3em] text-white/20">Scroll to explore</p>
-					<p class="text-[10px] uppercase tracking-[0.3em] text-white/20" id="gallery-counter">01 / {String(sketches.length).padStart(2, '0')}</p>
-				</div>
-			</div>
+<!-- Bento Grid Gallery -->
+<section id="gallery" class="relative py-20 md:py-32 px-4 md:px-8 lg:px-12">
+	<div class="max-w-[1400px] mx-auto">
+		<div class="mb-12 md:mb-16">
+			<p class="text-[11px] uppercase tracking-[0.5em] text-white/30 mb-4">Selected Works</p>
+			<h2 class="text-4xl md:text-6xl font-bold">Gallery</h2>
 		</div>
-	</div>
-</section>
 
-<!-- Stacked Card Section -->
-<section class="py-24 md:py-32 px-6 md:px-12">
-	<div class="max-w-7xl mx-auto">
-		<p class="text-[11px] uppercase tracking-[0.5em] text-white/30 mb-4">Featured Pieces</p>
-		<h2 class="text-4xl md:text-6xl font-bold mb-12 md:mb-16">Highlights</h2>
-
-		<div class="space-y-6 md:space-y-8" id="stacked-cards">
-			{[
-				{ title: 'Portrait Collection', desc: 'Capturing emotion through graphite and charcoal. Each face tells a unique story.', count: '12 Pieces', image: '/artworks/sketch_01.png' },
-				{ title: 'Nature & Landscapes', desc: 'From delicate flowers to vast horizons — pencil strokes that bring nature to life.', count: '8 Pieces', image: '/artworks/sketch_02.png' },
-				{ title: 'Charcoal Series', desc: 'Bold, expressive charcoal work exploring contrast, shadow, and raw emotion.', count: '6 Pieces', image: '/artworks/sketch_04.png' },
-			].map((card, i) => (
-				<div class="sticky rounded-xl md:rounded-2xl border border-white/5 bg-[#111] overflow-hidden group"
-					style={`top: ${100 + i * 50}px;`}>
-					<div class="grid md:grid-cols-2 gap-0">
-						<div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center order-2 md:order-1">
-							<p class="text-[10px] uppercase tracking-[0.4em] text-white/30 mb-3 md:mb-4">{card.count}</p>
-							<h3 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">{card.title}</h3>
-							<p class="text-white/40 text-sm leading-relaxed mb-6 md:mb-8">{card.desc}</p>
-							<a href="#gallery" class="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/60 hover:text-white transition-colors group/link">
-								View Collection
-								<svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-							</a>
-						</div>
-						<div class="aspect-[16/9] md:aspect-auto relative overflow-hidden order-1 md:order-2">
-							<img src={card.image} alt={card.title}
-								class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
-								loading="lazy" />
-						</div>
-					</div>
+		<!-- Bento Grid -->
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[140px] sm:auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[220px]">
+			
+			<!-- Card 1: Portrait Study — tall left -->
+			<div class="bento-card group row-span-2 col-span-1 md:col-span-2 md:row-span-2 relative overflow-hidden rounded-xl md:rounded-2xl bg-white/5 cursor-pointer">
+				<img src={sketches[0].image} alt={sketches[0].title}
+					class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+				<div class="absolute bottom-0 left-0 right-0 p-4 md:p-6 lg:p-8">
+					<p class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">{sketches[0].category}</p>
+					<p class="text-base md:text-xl lg:text-2xl font-['Playfair_Display',serif]">{sketches[0].title}</p>
 				</div>
-			))}
+				<div class="absolute top-3 right-3 md:top-4 md:right-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+					<svg class="w-3 h-3 md:w-4 md:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+				</div>
+			</div>
+
+			<!-- Card 2: Mountain Serenity — wide top right -->
+			<div class="bento-card group col-span-1 md:col-span-2 relative overflow-hidden rounded-xl md:rounded-2xl bg-white/5 cursor-pointer">
+				<img src={sketches[1].image} alt={sketches[1].title}
+					class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+				<div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+					<p class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">{sketches[1].category}</p>
+					<p class="text-sm md:text-lg font-['Playfair_Display',serif]">{sketches[1].title}</p>
+				</div>
+			</div>
+
+			<!-- Card 3: Lotus Bloom — small square -->
+			<div class="bento-card group relative overflow-hidden rounded-xl md:rounded-2xl bg-white/5 cursor-pointer">
+				<img src={sketches[2].image} alt={sketches[2].title}
+					class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+				<div class="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+					<p class="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-0.5">{sketches[2].category}</p>
+					<p class="text-xs md:text-sm font-['Playfair_Display',serif]">{sketches[2].title}</p>
+				</div>
+			</div>
+
+			<!-- Card 4: Wisdom Lines — small -->
+			<div class="bento-card group relative overflow-hidden rounded-xl md:rounded-2xl bg-white/5 cursor-pointer">
+				<img src={sketches[3].image} alt={sketches[3].title}
+					class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+				<div class="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+					<p class="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-0.5">{sketches[3].category}</p>
+					<p class="text-xs md:text-sm font-['Playfair_Display',serif]">{sketches[3].title}</p>
+				</div>
+			</div>
+
+			<!-- Stats card — text only, no image -->
+			<div class="bento-card col-span-2 md:col-span-1 relative overflow-hidden rounded-xl md:rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col justify-center p-5 md:p-6">
+				<p class="text-3xl md:text-4xl font-['Playfair_Display',serif] font-bold mb-1">50+</p>
+				<p class="text-[10px] uppercase tracking-[0.3em] text-white/30">Artworks Created</p>
+				<div class="absolute top-4 right-4 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center">
+					<svg class="w-3 h-3 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+				</div>
+			</div>
+
+			<!-- Card 5: Vintage Journey — wide -->
+			<div class="bento-card group col-span-2 md:col-span-1 row-span-2 relative overflow-hidden rounded-xl md:rounded-2xl bg-white/5 cursor-pointer">
+				<img src={sketches[4].image} alt={sketches[4].title}
+					class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+				<div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+					<p class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">{sketches[4].category}</p>
+					<p class="text-sm md:text-lg font-['Playfair_Display',serif]">{sketches[4].title}</p>
+				</div>
+			</div>
+
+			<!-- Card 6: Wild Gaze — medium -->
+			<div class="bento-card group col-span-1 md:col-span-2 relative overflow-hidden rounded-xl md:rounded-2xl bg-white/5 cursor-pointer">
+				<img src={sketches[5].image} alt={sketches[5].title}
+					class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+				<div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+					<p class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">{sketches[5].category}</p>
+					<p class="text-sm md:text-lg font-['Playfair_Display',serif]">{sketches[5].title}</p>
+				</div>
+			</div>
+
+			<!-- CTA card -->
+			<div class="bento-card col-span-1 relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/5 flex flex-col justify-center items-center p-5 md:p-6 text-center">
+				<p class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/30 mb-2">Want one?</p>
+				<a href="#commission" class="text-xs md:text-sm text-white/70 hover:text-white transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/50">
+					Commission a Sketch
+				</a>
+			</div>
+
+			<!-- Card 7: Grace in Motion — tall -->
+			<div class="bento-card group row-span-2 relative overflow-hidden rounded-xl md:rounded-2xl bg-white/5 cursor-pointer">
+				<img src={sketches[6].image} alt={sketches[6].title}
+					class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+				<div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+					<p class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">{sketches[6].category}</p>
+					<p class="text-sm md:text-lg font-['Playfair_Display',serif]">{sketches[6].title}</p>
+				</div>
+			</div>
+
+			<!-- Card 8: Temple Ruins — wide bottom -->
+			<div class="bento-card group col-span-1 md:col-span-2 row-span-2 relative overflow-hidden rounded-xl md:rounded-2xl bg-white/5 cursor-pointer">
+				<img src={sketches[7].image} alt={sketches[7].title}
+					class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+				<div class="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+					<p class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">{sketches[7].category}</p>
+					<p class="text-base md:text-xl font-['Playfair_Display',serif]">{sketches[7].title}</p>
+				</div>
+			</div>
+
+			<!-- IG card -->
+			<div class="bento-card col-span-1 relative overflow-hidden rounded-xl md:rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col justify-center items-center p-4 md:p-6 text-center">
+				<svg class="w-6 h-6 md:w-8 md:h-8 text-white/20 mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+				<a href="https://www.instagram.com/sketching_.wid_.heart" target="_blank" rel="noopener"
+					class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/30 hover:text-white/60 transition-colors">
+					@sketching_.wid_.heart
+				</a>
+			</div>
 		</div>
 	</div>
 </section>
 
 <style>
-	.gallery-scroll-outer {
-		/* Height = viewport + total horizontal scroll distance */
-		/* This gets set dynamically by JS */
-		height: 400vh;
+	.bento-card {
+		transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
 	}
-
-	@media (max-width: 768px) {
-		/* On mobile, disable scroll hijack - use native horizontal scroll */
-		.gallery-scroll-outer {
-			height: auto !important;
-		}
-		.gallery-scroll-outer > .sticky {
-			position: relative !important;
-			height: auto !important;
-		}
-		#gallery-track {
-			overflow-x: auto;
-			-webkit-overflow-scrolling: touch;
-		}
-		#gallery-track::-webkit-scrollbar { display: none; }
-		#gallery-track { -ms-overflow-style: none; scrollbar-width: none; }
+	.bento-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
 	}
 </style>
-
-<script>
-	function initGallery() {
-		const outer = document.getElementById('gallery-outer');
-		const sticky = document.getElementById('gallery-sticky');
-		const track = document.getElementById('gallery-track');
-		const progress = document.getElementById('gallery-progress');
-		const counter = document.getElementById('gallery-counter');
-		
-		if (!outer || !sticky || !track || !progress) return;
-		
-		const isMobile = window.innerWidth <= 768;
-		
-		if (isMobile) {
-			// Mobile: native horizontal scroll with touch
-			track.addEventListener('scroll', () => {
-				const pct = track.scrollLeft / (track.scrollWidth - track.clientWidth) * 100;
-				if (progress) progress.style.width = `${Math.min(pct, 100)}%`;
-			});
-			return;
-		}
-		
-		// Desktop: scroll-hijack
-		const innerTrack = track.querySelector('div');
-		if (!innerTrack) return;
-		
-		function updateDimensions() {
-			const trackWidth = innerTrack.scrollWidth;
-			const viewportWidth = window.innerWidth;
-			const scrollDistance = trackWidth - viewportWidth;
-			// Set outer height = screen height + scroll distance (so there's enough room to scroll through)
-			outer.style.height = `${window.innerHeight + scrollDistance}px`;
-			return { scrollDistance, trackWidth };
-		}
-		
-		let dims = updateDimensions();
-		
-		function onScroll() {
-			const outerRect = outer.getBoundingClientRect();
-			const scrollDistance = dims.scrollDistance;
-			
-			// How far into the section are we? (0 when top hits viewport top, increases as we scroll)
-			const scrolled = -outerRect.top;
-			const progress_pct = Math.max(0, Math.min(1, scrolled / scrollDistance));
-			
-			// Move track horizontally
-			innerTrack.style.transform = `translateX(${-progress_pct * scrollDistance}px)`;
-			
-			// Update progress bar
-			if (progress) progress.style.width = `${progress_pct * 100}%`;
-			
-			// Update counter
-			if (counter) {
-				const totalCards = 8;
-				const currentCard = Math.min(totalCards, Math.floor(progress_pct * totalCards) + 1);
-				counter.textContent = String(currentCard).padStart(2, '0') + ' / ' + String(totalCards).padStart(2, '0');
-			}
-		}
-		
-		window.addEventListener('scroll', onScroll, { passive: true });
-		window.addEventListener('resize', () => {
-			dims = updateDimensions();
-			onScroll();
-		});
-		
-		onScroll();
-	}
-	
-	document.addEventListener('DOMContentLoaded', initGallery);
-	// Also fire on astro page loads
-	document.addEventListener('astro:page-load', initGallery);
-</script>
