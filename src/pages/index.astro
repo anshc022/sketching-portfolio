@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Home">
+  <!-- Hero Section -->
+  <section class="max-w-6xl mx-auto px-4 py-20 md:py-32 text-center">
+    <p class="text-gold text-sm font-body font-medium tracking-[0.3em] uppercase mb-4">Artist Portfolio</p>
+    <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl text-charcoal leading-tight mb-6">
+      Sketching<br/><span class="italic text-gold">wid</span> Heart
+    </h1>
+    <p class="font-body text-charcoal/70 text-lg md:text-xl max-w-2xl mx-auto mb-10">
+      Every stroke tells a story. Pencil sketches, charcoal portraits, and illustrations crafted with passion and precision.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/gallery" class="px-8 py-3 bg-charcoal text-parchment font-body font-medium rounded hover:bg-gold transition-colors">
+        View Gallery
+      </a>
+      <a href="/commission" class="px-8 py-3 border-2 border-charcoal text-charcoal font-body font-medium rounded hover:bg-charcoal hover:text-parchment transition-all">
+        Commission a Piece
+      </a>
+    </div>
+  </section>
+
+  <!-- Featured Works -->
+  <section class="max-w-6xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <p class="text-gold text-sm font-body font-medium tracking-[0.3em] uppercase mb-2">Selected Works</p>
+      <h2 class="font-heading text-3xl md:text-4xl text-charcoal">Featured Sketches</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Placeholder cards (will be replaced with real IG content) -->
+      <div class="gallery-card aspect-[3/4] bg-parchment-dark rounded-lg flex items-center justify-center">
+        <div class="text-center p-6">
+          <svg class="w-16 h-16 mx-auto text-charcoal/20 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <p class="text-charcoal/40 font-body text-sm">Portrait Study</p>
+          <p class="text-charcoal/30 font-body text-xs mt-1">Graphite on paper</p>
+        </div>
+      </div>
+      <div class="gallery-card aspect-square bg-parchment-dark rounded-lg flex items-center justify-center">
+        <div class="text-center p-6">
+          <svg class="w-16 h-16 mx-auto text-charcoal/20 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <p class="text-charcoal/40 font-body text-sm">Nature Sketch</p>
+          <p class="text-charcoal/30 font-body text-xs mt-1">Charcoal on textured paper</p>
+        </div>
+      </div>
+      <div class="gallery-card aspect-[3/4] bg-parchment-dark rounded-lg flex items-center justify-center">
+        <div class="text-center p-6">
+          <svg class="w-16 h-16 mx-auto text-charcoal/20 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <p class="text-charcoal/40 font-body text-sm">Eye Detail</p>
+          <p class="text-charcoal/30 font-body text-xs mt-1">Pencil on 200gsm</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-10">
+      <a href="/gallery" class="text-gold font-body font-medium hover:underline">View all works &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Instagram Feed Section -->
+  <section class="bg-parchment-dark py-16">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gold text-sm font-body font-medium tracking-[0.3em] uppercase mb-2">Follow the Journey</p>
+      <h2 class="font-heading text-3xl md:text-4xl text-charcoal mb-4">@sketching_.wid_.heart</h2>
+      <p class="text-charcoal/60 font-body mb-8">Latest posts from Instagram, updated automatically.</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="ig-feed">
+        <!-- IG feed will be populated via API -->
+        {[1,2,3,4].map(() => (
+          <div class="aspect-square bg-parchment rounded-lg animate-pulse"></div>
+        ))}
+      </div>
+      <a href="https://www.instagram.com/sketching_.wid_.heart" target="_blank" rel="noopener" class="inline-block mt-8 px-6 py-3 border-2 border-gold text-gold font-body font-medium rounded hover:bg-gold hover:text-parchment transition-all">
+        Follow on Instagram
+      </a>
+    </div>
+  </section>
+</Base>
