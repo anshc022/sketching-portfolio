@@ -8,7 +8,7 @@ const navItems = [
 ---
 
 <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500" id="navbar">
-	<div class="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
+	<div class="relative z-[60] max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
 		<a href="#home" class="font-['Playfair_Display',serif] text-lg md:text-xl tracking-wider text-white/90 hover:text-white transition-colors">
 			S.W.H
 		</a>
@@ -19,19 +19,19 @@ const navItems = [
 				<a href={item.href}
 					class="text-[11px] uppercase tracking-[0.3em] text-white/50 hover:text-white transition-all duration-300 relative group">
 					{item.label}
-					<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
+					<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-amber-400 to-orange-400 group-hover:w-full transition-all duration-300"></span>
 				</a>
 			))}
 		</div>
 
 		<div class="flex items-center gap-4">
 			<a href="https://www.instagram.com/sketching_.wid_.heart" target="_blank" rel="noopener"
-				class="text-[11px] uppercase tracking-[0.3em] text-white/50 hover:text-white transition-colors">
+				class="hidden md:inline-flex text-[11px] uppercase tracking-[0.3em] text-white/50 hover:text-amber-400 transition-colors">
 				IG
 			</a>
 
 			<!-- Mobile hamburger -->
-			<button class="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px]" id="menu-toggle">
+			<button class="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-[5px]" id="menu-toggle" aria-label="Toggle menu">
 				<span class="w-5 h-[1.5px] bg-white/70 transition-all duration-300 origin-center" id="bar1"></span>
 				<span class="w-5 h-[1.5px] bg-white/70 transition-all duration-300" id="bar2"></span>
 				<span class="w-3.5 h-[1.5px] bg-white/70 transition-all duration-300 origin-center" id="bar3"></span>
@@ -40,17 +40,24 @@ const navItems = [
 	</div>
 
 	<!-- Mobile menu overlay -->
-	<div class="fixed inset-0 bg-[#0a0a0a]/95 backdrop-blur-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 md:hidden" id="mobile-menu">
+	<div class="fixed inset-0 bg-[#0a0a0a]/98 backdrop-blur-2xl flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 md:hidden z-[55]" id="mobile-menu">
 		<div class="flex flex-col items-center gap-8">
-			{navItems.map(item => (
+			{navItems.map((item, i) => (
 				<a href={item.href}
-					class="mobile-nav-link text-2xl font-['Playfair_Display',serif] text-white/70 hover:text-white transition-colors tracking-wider">
+					class="mobile-nav-link text-3xl font-['Playfair_Display',serif] text-white/70 hover:text-amber-400 transition-colors tracking-wider"
+					style={`transition-delay: ${i * 80}ms;`}>
 					{item.label}
 				</a>
 			))}
+		</div>
+		<div class="mt-12 flex flex-col items-center gap-4">
 			<a href="https://www.instagram.com/sketching_.wid_.heart" target="_blank" rel="noopener"
-				class="text-[11px] uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors mt-4">
+				class="text-[11px] uppercase tracking-[0.3em] text-amber-400/60 hover:text-amber-400 transition-colors">
 				@sketching_.wid_.heart
+			</a>
+			<a href="https://www.instagram.com/varsha.r_.o" target="_blank" rel="noopener"
+				class="text-[11px] uppercase tracking-[0.3em] text-white/30 hover:text-white/60 transition-colors">
+				Personal IG
 			</a>
 		</div>
 	</div>
@@ -65,41 +72,42 @@ const navItems = [
 	const bar3 = document.getElementById('bar3');
 	let menuOpen = false;
 
+	function closeMenu() {
+		menuOpen = false;
+		mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
+		mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
+		bar1?.classList.remove('rotate-45', 'translate-y-[6.5px]');
+		bar2?.classList.remove('opacity-0');
+		bar3?.classList.remove('-rotate-45', '-translate-y-[6.5px]', 'w-5');
+		document.body.style.overflow = '';
+	}
+
+	function openMenu() {
+		menuOpen = true;
+		mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
+		mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
+		bar1?.classList.add('rotate-45', 'translate-y-[6.5px]');
+		bar2?.classList.add('opacity-0');
+		bar3?.classList.add('-rotate-45', '-translate-y-[6.5px]', 'w-5');
+		document.body.style.overflow = 'hidden';
+	}
+
 	menuToggle?.addEventListener('click', () => {
-		menuOpen = !menuOpen;
-		if (menuOpen) {
-			mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
-			mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
-			bar1?.classList.add('rotate-45', 'translate-y-[6.5px]');
-			bar2?.classList.add('opacity-0');
-			bar3?.classList.add('-rotate-45', '-translate-y-[6.5px]', 'w-5');
-			document.body.style.overflow = 'hidden';
-		} else {
-			mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
-			mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
-			bar1?.classList.remove('rotate-45', 'translate-y-[6.5px]');
-			bar2?.classList.remove('opacity-0');
-			bar3?.classList.remove('-rotate-45', '-translate-y-[6.5px]', 'w-5');
-			document.body.style.overflow = '';
-		}
+		menuOpen ? closeMenu() : openMenu();
 	});
 
 	// Close menu on nav link click
 	document.querySelectorAll('.mobile-nav-link').forEach(link => {
-		link.addEventListener('click', () => {
-			menuOpen = false;
-			mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
-			mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
-			bar1?.classList.remove('rotate-45', 'translate-y-[6.5px]');
-			bar2?.classList.remove('opacity-0');
-			bar3?.classList.remove('-rotate-45', '-translate-y-[6.5px]', 'w-5');
-			document.body.style.overflow = '';
-		});
+		link.addEventListener('click', closeMenu);
+	});
+
+	// Close on escape
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && menuOpen) closeMenu();
 	});
 
 	window.addEventListener('scroll', () => {
-		const current = window.scrollY;
-		if (current > 100) {
+		if (window.scrollY > 100) {
 			navbar?.classList.add('bg-[#0a0a0a]/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
 		} else {
 			navbar?.classList.remove('bg-[#0a0a0a]/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
