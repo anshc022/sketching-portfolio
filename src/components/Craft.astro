@@ -12,16 +12,20 @@
 
 		<div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
 			{[
-				{ icon: '✏️', name: 'Graphite Pencils', desc: 'HB to 8B range for subtle to deep tones', detail: 'Primary medium' },
-				{ icon: '🖤', name: 'Charcoal', desc: 'Rich blacks and dramatic contrast', detail: 'Expressive work' },
-				{ icon: '📐', name: 'Blending Stumps', desc: 'Smooth gradients and skin textures', detail: 'Detail finishing' },
-				{ icon: '📄', name: 'Mixed Paper', desc: 'Cold-pressed, smooth bristol, toned', detail: 'Surface variety' },
+				{ image: '/artworks/craft_graphite.png', name: 'Graphite Pencils', desc: 'HB to 8B range for subtle to deep tones', detail: 'Primary medium' },
+				{ image: '/artworks/craft_charcoal.png', name: 'Charcoal', desc: 'Rich blacks and dramatic contrast', detail: 'Expressive work' },
+				{ image: '/artworks/craft_blending.png', name: 'Blending Stumps', desc: 'Smooth gradients and skin textures', detail: 'Detail finishing' },
+				{ image: '/artworks/craft_paper.png', name: 'Mixed Paper', desc: 'Cold-pressed, smooth bristol, toned', detail: 'Surface variety' },
 			].map((m, i) => (
-				<div class={`reveal reveal-delay-${i + 1} group bg-[#1a1a1a]/[0.02] dark:bg-white/[0.02] border border-[#1a1a1a]/[0.06] dark:border-white/[0.06] rounded-xl md:rounded-2xl p-5 md:p-7 hover:border-amber-500/15 dark:hover:border-amber-400/10 transition-all duration-500 cursor-default`}>
-					<div class="text-2xl md:text-3xl mb-4 md:mb-5 group-hover:scale-110 transition-transform duration-300">{m.icon}</div>
-					<p class="text-sm md:text-base font-['Playfair_Display',serif] mb-1.5">{m.name}</p>
-					<p class="text-[11px] md:text-xs text-[#1a1a1a]/30 dark:text-white/25 leading-relaxed mb-3">{m.desc}</p>
-					<span class="text-[9px] uppercase tracking-[0.2em] text-amber-600/30 dark:text-amber-400/20">{m.detail}</span>
+				<div class={`reveal reveal-delay-${i + 1} group bg-[#1a1a1a]/[0.02] dark:bg-white/[0.02] border border-[#1a1a1a]/[0.06] dark:border-white/[0.06] rounded-xl md:rounded-2xl overflow-hidden hover:border-amber-500/15 dark:hover:border-amber-400/10 transition-all duration-500 cursor-default`}>
+					<div class="aspect-[4/3] overflow-hidden">
+						<img src={m.image} alt={m.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+					</div>
+					<div class="p-4 md:p-5">
+						<p class="text-sm md:text-base font-['Playfair_Display',serif] mb-1.5">{m.name}</p>
+						<p class="text-[11px] md:text-xs text-[#1a1a1a]/30 dark:text-white/25 leading-relaxed mb-3">{m.desc}</p>
+						<span class="text-[9px] uppercase tracking-[0.2em] text-amber-600/30 dark:text-amber-400/20">{m.detail}</span>
+					</div>
 				</div>
 			))}
 		</div>
