@@ -1,91 +1,93 @@
 ---
 const sketches = [
-	{ id: 1, title: 'Portrait Study', category: 'Portrait', aspect: '3/4', image: '/artworks/sketch_01.png' },
-	{ id: 2, title: 'Mountain Serenity', category: 'Landscape', aspect: '4/3', image: '/artworks/sketch_02.png' },
-	{ id: 3, title: 'Lotus Bloom', category: 'Detail', aspect: '1/1', image: '/artworks/sketch_03.png' },
-	{ id: 4, title: 'Wisdom Lines', category: 'Portrait', aspect: '3/4', image: '/artworks/sketch_04.png' },
-	{ id: 5, title: 'Vintage Journey', category: 'Object', aspect: '4/3', image: '/artworks/sketch_05.png' },
-	{ id: 6, title: 'Wild Gaze', category: 'Detail', aspect: '1/1', image: '/artworks/sketch_06.png' },
-	{ id: 7, title: 'Grace in Motion', category: 'Portrait', aspect: '2/3', image: '/artworks/sketch_07.png' },
-	{ id: 8, title: 'Temple Ruins', category: 'Landscape', aspect: '4/3', image: '/artworks/sketch_08.png' },
+	{ id: 1, title: 'Portrait Study', category: 'Portrait', image: '/artworks/sketch_01.png' },
+	{ id: 2, title: 'Mountain Serenity', category: 'Landscape', image: '/artworks/sketch_02.png' },
+	{ id: 3, title: 'Lotus Bloom', category: 'Detail', image: '/artworks/sketch_03.png' },
+	{ id: 4, title: 'Wisdom Lines', category: 'Portrait', image: '/artworks/sketch_04.png' },
+	{ id: 5, title: 'Vintage Journey', category: 'Object', image: '/artworks/sketch_05.png' },
+	{ id: 6, title: 'Wild Gaze', category: 'Detail', image: '/artworks/sketch_06.png' },
+	{ id: 7, title: 'Grace in Motion', category: 'Portrait', image: '/artworks/sketch_07.png' },
+	{ id: 8, title: 'Temple Ruins', category: 'Landscape', image: '/artworks/sketch_08.png' },
 ];
 ---
 
-<!-- Horizontal Scroll Gallery -->
-<section id="gallery" class="relative py-32">
-	<div class="px-8 mb-16">
+<!-- Scroll-Hijack Horizontal Gallery -->
+<section id="gallery" class="relative">
+	<!-- Header pinned -->
+	<div class="px-6 md:px-12 pt-32 pb-12">
 		<p class="text-[11px] uppercase tracking-[0.5em] text-white/30 mb-4">Selected Works</p>
-		<h2 class="text-5xl md:text-6xl font-bold">Gallery</h2>
+		<h2 class="text-4xl md:text-6xl font-bold">Gallery</h2>
 	</div>
 
-	<div class="relative">
-		<div class="overflow-x-auto pb-8 hide-scrollbar" id="horizontal-scroll">
-			<div class="flex gap-6 px-8" style="width: max-content;">
-				{sketches.map((sketch, i) => (
-					<div class="group relative flex-shrink-0 cursor-pointer"
-						style={`width: ${sketch.aspect === '1/1' ? '350px' : sketch.aspect === '4/3' ? '420px' : '300px'};`}>
-						<div class={`relative overflow-hidden bg-white/5 rounded-lg`}
-							style={`aspect-ratio: ${sketch.aspect};`}>
-							<!-- Artwork image -->
-							<img src={sketch.image} alt={sketch.title} 
-								class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-								loading="lazy" />
-
-							<!-- Hover overlay -->
-							<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
-								<div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-									<p class="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-1">{sketch.category}</p>
-									<p class="text-lg font-['Playfair_Display']">{sketch.title}</p>
+	<!-- This outer wrapper's height drives the scroll distance -->
+	<div class="gallery-scroll-outer" id="gallery-outer">
+		<!-- Sticky container stays pinned while outer scrolls -->
+		<div class="sticky top-0 h-screen overflow-hidden" id="gallery-sticky">
+			<!-- Horizontal track that translates left -->
+			<div class="flex items-center h-full" id="gallery-track">
+				<div class="flex gap-6 md:gap-8 pl-6 md:pl-12 pr-[50vw]">
+					{sketches.map((sketch) => (
+						<div class="group relative flex-shrink-0 w-[75vw] sm:w-[50vw] md:w-[35vw] lg:w-[28vw] h-[70vh] cursor-pointer">
+							<div class="relative w-full h-full overflow-hidden rounded-xl bg-white/5">
+								<img src={sketch.image} alt={sketch.title}
+									class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+									loading="lazy" />
+								<!-- Gradient overlay -->
+								<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+								<!-- Hover overlay -->
+								<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+								<!-- Info -->
+								<div class="absolute bottom-0 left-0 right-0 p-6 md:p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+									<p class="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2">{sketch.category}</p>
+									<p class="text-xl md:text-2xl font-['Playfair_Display',serif]">{sketch.title}</p>
 								</div>
 							</div>
 						</div>
-					</div>
-				))}
+					))}
+				</div>
 			</div>
-		</div>
 
-		<!-- Scroll indicators -->
-		<div class="flex items-center gap-4 px-8 mt-8">
-			<button id="scroll-left" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
-				<svg class="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
-			</button>
-			<div class="flex-1 h-[1px] bg-white/10 relative">
-				<div class="h-full bg-white/40 transition-all duration-300" id="scroll-progress" style="width: 0%"></div>
+			<!-- Progress bar at bottom -->
+			<div class="absolute bottom-8 left-6 right-6 md:left-12 md:right-12">
+				<div class="h-[2px] bg-white/10 rounded-full overflow-hidden">
+					<div class="h-full bg-white/50 rounded-full transition-none" id="gallery-progress" style="width: 0%"></div>
+				</div>
+				<div class="flex justify-between mt-3">
+					<p class="text-[10px] uppercase tracking-[0.3em] text-white/20">Scroll to explore</p>
+					<p class="text-[10px] uppercase tracking-[0.3em] text-white/20" id="gallery-counter">01 / {String(sketches.length).padStart(2, '0')}</p>
+				</div>
 			</div>
-			<button id="scroll-right" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
-				<svg class="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
-			</button>
 		</div>
 	</div>
 </section>
 
 <!-- Stacked Card Section -->
-<section class="py-32 px-8">
+<section class="py-24 md:py-32 px-6 md:px-12">
 	<div class="max-w-7xl mx-auto">
 		<p class="text-[11px] uppercase tracking-[0.5em] text-white/30 mb-4">Featured Pieces</p>
-		<h2 class="text-5xl md:text-6xl font-bold mb-16">Highlights</h2>
+		<h2 class="text-4xl md:text-6xl font-bold mb-12 md:mb-16">Highlights</h2>
 
-		<div class="space-y-8" id="stacked-cards">
+		<div class="space-y-6 md:space-y-8" id="stacked-cards">
 			{[
 				{ title: 'Portrait Collection', desc: 'Capturing emotion through graphite and charcoal. Each face tells a unique story.', count: '12 Pieces', image: '/artworks/sketch_01.png' },
 				{ title: 'Nature & Landscapes', desc: 'From delicate flowers to vast horizons — pencil strokes that bring nature to life.', count: '8 Pieces', image: '/artworks/sketch_02.png' },
 				{ title: 'Charcoal Series', desc: 'Bold, expressive charcoal work exploring contrast, shadow, and raw emotion.', count: '6 Pieces', image: '/artworks/sketch_04.png' },
 			].map((card, i) => (
-				<div class="sticky rounded-2xl border border-white/5 bg-[#111] overflow-hidden group"
-					style={`top: ${120 + i * 60}px;`}>
+				<div class="sticky rounded-xl md:rounded-2xl border border-white/5 bg-[#111] overflow-hidden group"
+					style={`top: ${100 + i * 50}px;`}>
 					<div class="grid md:grid-cols-2 gap-0">
-						<div class="p-12 md:p-16 flex flex-col justify-center">
-							<p class="text-[10px] uppercase tracking-[0.4em] text-white/30 mb-4">{card.count}</p>
-							<h3 class="text-3xl md:text-4xl font-bold mb-4">{card.title}</h3>
-							<p class="text-white/40 text-sm leading-relaxed mb-8">{card.desc}</p>
+						<div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center order-2 md:order-1">
+							<p class="text-[10px] uppercase tracking-[0.4em] text-white/30 mb-3 md:mb-4">{card.count}</p>
+							<h3 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">{card.title}</h3>
+							<p class="text-white/40 text-sm leading-relaxed mb-6 md:mb-8">{card.desc}</p>
 							<a href="#gallery" class="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/60 hover:text-white transition-colors group/link">
 								View Collection
 								<svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
 							</a>
 						</div>
-						<div class="aspect-[4/3] md:aspect-auto relative overflow-hidden">
-							<img src={card.image} alt={card.title} 
-								class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" 
+						<div class="aspect-[16/9] md:aspect-auto relative overflow-hidden order-1 md:order-2">
+							<img src={card.image} alt={card.title}
+								class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
 								loading="lazy" />
 						</div>
 					</div>
@@ -96,28 +98,98 @@ const sketches = [
 </section>
 
 <style>
-	.hide-scrollbar::-webkit-scrollbar { display: none; }
-	.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+	.gallery-scroll-outer {
+		/* Height = viewport + total horizontal scroll distance */
+		/* This gets set dynamically by JS */
+		height: 400vh;
+	}
+
+	@media (max-width: 768px) {
+		/* On mobile, disable scroll hijack - use native horizontal scroll */
+		.gallery-scroll-outer {
+			height: auto !important;
+		}
+		.gallery-scroll-outer > .sticky {
+			position: relative !important;
+			height: auto !important;
+		}
+		#gallery-track {
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+		}
+		#gallery-track::-webkit-scrollbar { display: none; }
+		#gallery-track { -ms-overflow-style: none; scrollbar-width: none; }
+	}
 </style>
 
 <script>
-	const container = document.getElementById('horizontal-scroll');
-	const progress = document.getElementById('scroll-progress');
-	const leftBtn = document.getElementById('scroll-left');
-	const rightBtn = document.getElementById('scroll-right');
-
-	container?.addEventListener('scroll', () => {
-		if (container && progress) {
-			const pct = container.scrollLeft / (container.scrollWidth - container.clientWidth) * 100;
-			progress.style.width = `${pct}%`;
+	function initGallery() {
+		const outer = document.getElementById('gallery-outer');
+		const sticky = document.getElementById('gallery-sticky');
+		const track = document.getElementById('gallery-track');
+		const progress = document.getElementById('gallery-progress');
+		const counter = document.getElementById('gallery-counter');
+		
+		if (!outer || !sticky || !track || !progress) return;
+		
+		const isMobile = window.innerWidth <= 768;
+		
+		if (isMobile) {
+			// Mobile: native horizontal scroll with touch
+			track.addEventListener('scroll', () => {
+				const pct = track.scrollLeft / (track.scrollWidth - track.clientWidth) * 100;
+				if (progress) progress.style.width = `${Math.min(pct, 100)}%`;
+			});
+			return;
 		}
-	});
-
-	leftBtn?.addEventListener('click', () => {
-		container?.scrollBy({ left: -400, behavior: 'smooth' });
-	});
-
-	rightBtn?.addEventListener('click', () => {
-		container?.scrollBy({ left: 400, behavior: 'smooth' });
-	});
+		
+		// Desktop: scroll-hijack
+		const innerTrack = track.querySelector('div');
+		if (!innerTrack) return;
+		
+		function updateDimensions() {
+			const trackWidth = innerTrack.scrollWidth;
+			const viewportWidth = window.innerWidth;
+			const scrollDistance = trackWidth - viewportWidth;
+			// Set outer height = screen height + scroll distance (so there's enough room to scroll through)
+			outer.style.height = `${window.innerHeight + scrollDistance}px`;
+			return { scrollDistance, trackWidth };
+		}
+		
+		let dims = updateDimensions();
+		
+		function onScroll() {
+			const outerRect = outer.getBoundingClientRect();
+			const scrollDistance = dims.scrollDistance;
+			
+			// How far into the section are we? (0 when top hits viewport top, increases as we scroll)
+			const scrolled = -outerRect.top;
+			const progress_pct = Math.max(0, Math.min(1, scrolled / scrollDistance));
+			
+			// Move track horizontally
+			innerTrack.style.transform = `translateX(${-progress_pct * scrollDistance}px)`;
+			
+			// Update progress bar
+			if (progress) progress.style.width = `${progress_pct * 100}%`;
+			
+			// Update counter
+			if (counter) {
+				const totalCards = 8;
+				const currentCard = Math.min(totalCards, Math.floor(progress_pct * totalCards) + 1);
+				counter.textContent = String(currentCard).padStart(2, '0') + ' / ' + String(totalCards).padStart(2, '0');
+			}
+		}
+		
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', () => {
+			dims = updateDimensions();
+			onScroll();
+		});
+		
+		onScroll();
+	}
+	
+	document.addEventListener('DOMContentLoaded', initGallery);
+	// Also fire on astro page loads
+	document.addEventListener('astro:page-load', initGallery);
 </script>

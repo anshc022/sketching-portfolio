@@ -8,35 +8,35 @@
 		<div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/50 via-[#0a0a0a]/30 to-[#0a0a0a]"></div>
 		<!-- Grid pattern overlay -->
 		<div class="absolute inset-0 opacity-[0.03]"
-			style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;">
+			style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 40px 40px; md:background-size: 60px 60px;">
 		</div>
 	</div>
 
-	<div class="relative z-10 text-center px-6">
-		<p class="text-[11px] uppercase tracking-[0.5em] text-white/40 mb-8 animate-fade-up">Portfolio</p>
-		<h1 class="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] mb-6">
+	<div class="relative z-10 text-center px-4 md:px-6">
+		<p class="text-[10px] md:text-[11px] uppercase tracking-[0.4em] md:tracking-[0.5em] text-white/40 mb-6 md:mb-8 animate-fade-up">Portfolio</p>
+		<h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] mb-4 md:mb-6">
 			<span class="block opacity-0 animate-title-1">Sketching</span>
 			<span class="block text-white/30 opacity-0 animate-title-2">with</span>
 			<span class="block opacity-0 animate-title-3">Heart</span>
 		</h1>
-		<p class="text-white/30 text-sm tracking-wider mt-8 max-w-md mx-auto opacity-0 animate-subtitle">
+		<p class="text-white/30 text-xs md:text-sm tracking-wider mt-6 md:mt-8 max-w-sm md:max-w-md mx-auto opacity-0 animate-subtitle">
 			Graphite & Charcoal Art by Varsha
 		</p>
 
-		<div class="mt-16 opacity-0 animate-scroll-hint">
-			<div class="w-[1px] h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mx-auto"></div>
-			<p class="text-[10px] uppercase tracking-[0.4em] text-white/20 mt-4">Scroll</p>
+		<div class="mt-12 md:mt-16 opacity-0 animate-scroll-hint">
+			<div class="w-[1px] h-12 md:h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mx-auto"></div>
+			<p class="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-white/20 mt-3 md:mt-4">Scroll</p>
 		</div>
 	</div>
 </section>
 
 <style>
 	@keyframes fadeUp {
-		from { opacity: 0; transform: translateY(30px); }
+		from { opacity: 0; transform: translateY(20px); }
 		to { opacity: 1; transform: translateY(0); }
 	}
 	@keyframes titleReveal {
-		from { opacity: 0; transform: translateY(60px) skewY(3deg); }
+		from { opacity: 0; transform: translateY(40px) skewY(2deg); }
 		to { opacity: 1; transform: translateY(0) skewY(0); }
 	}
 
@@ -46,14 +46,25 @@
 	.animate-title-3 { animation: titleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards; }
 	.animate-subtitle { animation: fadeUp 1s ease-out 1.2s forwards; }
 	.animate-scroll-hint { animation: fadeUp 1s ease-out 1.8s forwards; }
+
+	@media (max-width: 768px) {
+		@keyframes titleReveal {
+			from { opacity: 0; transform: translateY(30px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+	}
 </style>
 
 <script>
 	const heroBg = document.getElementById('hero-bg');
-	window.addEventListener('scroll', () => {
-		if (heroBg) {
-			const scroll = window.scrollY;
-			heroBg.style.transform = `translateY(${scroll * 0.4}px)`;
-		}
-	});
+	const isMobile = window.innerWidth <= 768;
+	
+	if (!isMobile) {
+		window.addEventListener('scroll', () => {
+			if (heroBg) {
+				const scroll = window.scrollY;
+				heroBg.style.transform = `translateY(${scroll * 0.4}px)`;
+			}
+		}, { passive: true });
+	}
 </script>
