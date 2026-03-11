@@ -16,28 +16,30 @@ const crafts = [
 		</div>
 	</div>
 
-	<!-- Stacked cards container -->
+	<!-- Stacked cards container — works on both mobile and desktop -->
 	<div class="craft-stack-container relative">
 		{crafts.map((m, i) => (
-			<div class="craft-sticky-card sticky px-4 md:px-8 lg:px-12"
-				style={`top: ${80 + i * 30}px; z-index: ${10 + i};`}>
-				<div class={`max-w-[1400px] mx-auto bg-[#f0efe9] dark:bg-[#141414] border border-[#1a1a1a]/[0.08] dark:border-white/[0.06] rounded-2xl md:rounded-3xl overflow-hidden shadow-xl shadow-black/5 dark:shadow-black/30 transition-all duration-500`}>
-					<div class="grid md:grid-cols-2 gap-0">
+			<div class="craft-sticky-card px-4 md:px-8 lg:px-12 py-2 md:py-4"
+				style={`position: sticky; top: ${60 + i * 20}px; z-index: ${10 + i};`}>
+				<div class="max-w-[1400px] mx-auto bg-[#f0efe9] dark:bg-[#141414] border border-[#1a1a1a]/[0.08] dark:border-white/[0.06] rounded-2xl md:rounded-3xl overflow-hidden craft-card-shadow">
+					
+					<!-- Mobile: vertical card | Desktop: horizontal split -->
+					<div class="flex flex-col md:grid md:grid-cols-2 md:gap-0">
 						<!-- Image -->
-						<div class="aspect-[4/3] md:aspect-auto md:h-[400px] lg:h-[450px] overflow-hidden relative">
+						<div class="h-48 sm:h-56 md:h-[400px] lg:h-[450px] overflow-hidden relative">
 							<img src={m.image} alt={m.name} class="w-full h-full object-cover" loading="lazy" />
-							<div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#f0efe9]/20 dark:to-[#141414]/30 hidden md:block"></div>
-							<!-- Number overlay -->
-							<div class="absolute top-4 left-4 md:top-6 md:left-6">
-								<span class="text-[11px] font-['Space_Mono',monospace] text-white/40 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full">{m.num}</span>
+							<div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#f0efe9]/40 dark:from-[#141414]/40 md:from-transparent md:to-[#f0efe9]/20 md:dark:to-[#141414]/30 to-transparent"></div>
+							<!-- Number badge -->
+							<div class="absolute top-3 left-3 md:top-6 md:left-6">
+								<span class="text-[10px] md:text-[11px] font-['Space_Mono',monospace] text-white/50 bg-black/25 backdrop-blur-md px-2.5 py-1 md:px-3 md:py-1.5 rounded-full">{m.num}</span>
 							</div>
 						</div>
 
 						<!-- Content -->
-						<div class="flex flex-col justify-center p-6 md:p-10 lg:p-14">
-							<span class="text-[9px] uppercase tracking-[0.3em] text-amber-600/40 dark:text-amber-400/30 mb-3 md:mb-4">{m.detail}</span>
-							<h3 class="text-2xl md:text-3xl lg:text-4xl font-['Playfair_Display',serif] font-bold mb-4 md:mb-5">{m.name}</h3>
-							<p class="text-sm md:text-[15px] leading-[1.8] text-[#1a1a1a]/40 dark:text-white/35 mb-6 md:mb-8">{m.desc}</p>
+						<div class="flex flex-col justify-center p-5 sm:p-6 md:p-10 lg:p-14">
+							<span class="text-[9px] uppercase tracking-[0.3em] text-amber-600/40 dark:text-amber-400/30 mb-2 md:mb-4">{m.detail}</span>
+							<h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-['Playfair_Display',serif] font-bold mb-3 md:mb-5">{m.name}</h3>
+							<p class="text-xs sm:text-sm md:text-[15px] leading-[1.7] md:leading-[1.8] text-[#1a1a1a]/40 dark:text-white/35 mb-4 md:mb-8">{m.desc}</p>
 							<div class="flex items-center gap-3">
 								<div class="h-[1px] flex-1 bg-gradient-to-r from-amber-500/20 dark:from-amber-400/15 to-transparent"></div>
 								<span class="text-[10px] font-['Space_Mono',monospace] text-[#1a1a1a]/15 dark:text-white/15">{m.num} / 04</span>
@@ -48,30 +50,16 @@ const crafts = [
 			</div>
 		))}
 
-		<!-- Spacer so the last card has room to scroll into place -->
-		<div class="h-[20vh] md:h-[30vh]"></div>
+		<!-- Spacer so the last card has room to fully scroll into view -->
+		<div class="h-[30vh] md:h-[35vh]"></div>
 	</div>
 </section>
 
 <style>
-	.craft-stack-container {
-		/* Each card is ~500px tall on desktop; we need enough scroll height */
+	.craft-card-shadow {
+		box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 4px 12px -4px rgba(0, 0, 0, 0.04);
 	}
-	.craft-sticky-card {
-		padding-top: 1rem;
-		padding-bottom: 1rem;
-	}
-
-	/* On mobile, disable sticky stacking — just show normally */
-	@media (max-width: 767px) {
-		.craft-sticky-card {
-			position: relative !important;
-			top: 0 !important;
-			padding-top: 0.5rem;
-			padding-bottom: 0.5rem;
-		}
-		.craft-stack-container > div:last-child {
-			height: 0 !important;
-		}
+	:global(.dark) .craft-card-shadow {
+		box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.4), 0 4px 12px -4px rgba(0, 0, 0, 0.2);
 	}
 </style>
