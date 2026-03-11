@@ -2,14 +2,14 @@
 ---
 
 <!-- Marquee -->
-<div class="py-6 md:py-8 overflow-hidden border-y border-[#1a1a1a]/5 dark:border-white/5">
+<div class="py-8 md:py-10 overflow-hidden border-y border-[#1a1a1a]/[0.08] dark:border-white/[0.06] bg-gradient-to-r from-amber-500/[0.02] via-transparent to-amber-500/[0.02] dark:from-amber-400/[0.01] dark:via-transparent dark:to-amber-400/[0.01]">
 	<div class="animate-marquee whitespace-nowrap flex" style="animation-direction: reverse; animation-duration: 25s;">
 		{[...Array(4)].map(() => (
 			<span class="inline-flex items-center">
-				{['Commission', 'Custom Artwork', 'Portraits', 'Landscapes'].map(word => (
+				{['Commission', 'Custom Artwork', 'Portraits', 'Landscapes', 'Charcoal', 'Graphite'].map(word => (
 					<>
-						<span class="text-lg md:text-2xl font-['Playfair_Display',serif] italic text-[#1a1a1a]/[0.05] dark:text-white/[0.05] mx-8 md:mx-12">{word}</span>
-						<span class="w-1 h-1 rounded-full bg-[#1a1a1a]/[0.05] dark:bg-white/[0.05]"></span>
+						<span class="text-xl md:text-3xl font-['Playfair_Display',serif] italic text-[#1a1a1a]/[0.12] dark:text-white/[0.08] mx-8 md:mx-12 hover:text-amber-500/30 dark:hover:text-amber-400/20 transition-colors duration-500 cursor-default">{word}</span>
+						<span class="w-2 h-2 rounded-full bg-amber-500/[0.15] dark:bg-amber-400/[0.1]"></span>
 					</>
 				))}
 			</span>

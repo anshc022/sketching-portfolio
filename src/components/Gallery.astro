@@ -12,14 +12,14 @@ const sketches = [
 ---
 
 <!-- Marquee -->
-<div class="py-6 md:py-8 overflow-hidden border-y border-[#1a1a1a]/5 dark:border-white/5">
+<div class="py-8 md:py-10 overflow-hidden border-y border-[#1a1a1a]/[0.08] dark:border-white/[0.06] bg-gradient-to-r from-amber-500/[0.02] via-transparent to-amber-500/[0.02] dark:from-amber-400/[0.01] dark:via-transparent dark:to-amber-400/[0.01]">
 	<div class="animate-marquee whitespace-nowrap flex">
 		{[...Array(3)].map(() => (
 			<span class="inline-flex items-center">
-				{sketches.map(s => (
+				{sketches.map((s, i) => (
 					<>
-						<span class="text-xl md:text-3xl font-['Playfair_Display',serif] text-[#1a1a1a]/[0.06] dark:text-white/[0.06] mx-6 md:mx-10">{s.title}</span>
-						<span class="w-1.5 h-1.5 rounded-full bg-[#1a1a1a]/[0.06] dark:bg-white/[0.06]"></span>
+						<span class="text-2xl md:text-4xl font-['Playfair_Display',serif] text-[#1a1a1a]/[0.12] dark:text-white/[0.08] mx-6 md:mx-10 hover:text-amber-500/30 dark:hover:text-amber-400/20 transition-colors duration-500 cursor-default">{s.title}</span>
+						<span class="w-2 h-2 rounded-full bg-amber-500/[0.15] dark:bg-amber-400/[0.1]"></span>
 					</>
 				))}
 			</span>
