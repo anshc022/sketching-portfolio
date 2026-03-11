@@ -2,68 +2,127 @@
 ---
 
 <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-	<!-- Parallax background -->
-	<div class="absolute inset-0 parallax-bg" id="hero-bg">
-		<img src="/artworks/sketch_07.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" />
-		<div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/50 via-[#0a0a0a]/30 to-[#0a0a0a]"></div>
-		<!-- Grid pattern overlay -->
-		<div class="absolute inset-0 opacity-[0.03]"
-			style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 40px 40px; md:background-size: 60px 60px;">
+	<!-- Parallax background with multiple layers -->
+	<div class="absolute inset-0" id="hero-bg">
+		<img src="/artworks/sketch_07.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-15 scale-110" id="hero-img" />
+		<div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/20 to-[#0a0a0a]"></div>
+		<div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]/50"></div>
+	</div>
+
+	<!-- Floating sketch fragments -->
+	<div class="absolute inset-0 pointer-events-none overflow-hidden">
+		<div class="absolute top-[15%] left-[8%] w-20 h-28 md:w-32 md:h-44 opacity-[0.06] rounded-lg overflow-hidden floating-1">
+			<img src="/artworks/sketch_01.png" alt="" class="w-full h-full object-cover" />
+		</div>
+		<div class="absolute top-[60%] right-[10%] w-24 h-24 md:w-36 md:h-36 opacity-[0.05] rounded-lg overflow-hidden floating-2">
+			<img src="/artworks/sketch_06.png" alt="" class="w-full h-full object-cover" />
+		</div>
+		<div class="absolute bottom-[20%] left-[15%] w-16 h-20 md:w-24 md:h-32 opacity-[0.04] rounded-lg overflow-hidden floating-3">
+			<img src="/artworks/sketch_03.png" alt="" class="w-full h-full object-cover" />
 		</div>
 	</div>
 
+	<!-- Content -->
 	<div class="relative z-10 text-center px-4 md:px-6">
-		<p class="text-[10px] md:text-[11px] uppercase tracking-[0.4em] md:tracking-[0.5em] text-white/40 mb-6 md:mb-8 animate-fade-up">Portfolio</p>
-		<h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] mb-4 md:mb-6">
-			<span class="block opacity-0 animate-title-1">Sketching</span>
-			<span class="block text-white/30 opacity-0 animate-title-2">with</span>
-			<span class="block opacity-0 animate-title-3">Heart</span>
-		</h1>
-		<p class="text-white/30 text-xs md:text-sm tracking-wider mt-6 md:mt-8 max-w-sm md:max-w-md mx-auto opacity-0 animate-subtitle">
-			Graphite & Charcoal Art by Varsha
+		<!-- Decorative line -->
+		<div class="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent to-white/20 mx-auto mb-8 animate-line-down"></div>
+		
+		<p class="text-[10px] md:text-[11px] uppercase tracking-[0.5em] md:tracking-[0.6em] text-white/30 mb-6 md:mb-8 opacity-0 animate-hero-sub">
+			Art Portfolio — Est. 2023
 		</p>
-
-		<div class="mt-12 md:mt-16 opacity-0 animate-scroll-hint">
-			<div class="w-[1px] h-12 md:h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mx-auto"></div>
-			<p class="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-white/20 mt-3 md:mt-4">Scroll</p>
+		
+		<h1 class="leading-[0.85] mb-6 md:mb-8">
+			<span class="block text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-bold opacity-0 animate-hero-1 tracking-tight">Sketching</span>
+			<span class="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal italic text-white/25 opacity-0 animate-hero-2 mt-2 font-['Playfair_Display',serif]">with</span>
+			<span class="block text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-bold opacity-0 animate-hero-3 tracking-tight">Heart</span>
+		</h1>
+		
+		<div class="flex items-center justify-center gap-4 md:gap-6 mt-8 opacity-0 animate-hero-meta">
+			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white/20">Graphite</span>
+			<span class="w-1 h-1 rounded-full bg-white/20"></span>
+			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white/20">Charcoal</span>
+			<span class="w-1 h-1 rounded-full bg-white/20"></span>
+			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white/20">by Varsha</span>
 		</div>
+	</div>
+
+	<!-- Scroll indicator -->
+	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-hero-scroll">
+		<div class="flex flex-col items-center gap-3">
+			<div class="w-[1px] h-10 md:h-14 relative overflow-hidden">
+				<div class="absolute top-0 w-full h-full bg-gradient-to-b from-white/40 to-transparent animate-scroll-pulse"></div>
+			</div>
+			<p class="text-[9px] uppercase tracking-[0.4em] text-white/15">Scroll</p>
+		</div>
+	</div>
+
+	<!-- Side text -->
+	<div class="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
+		<p class="text-[9px] uppercase tracking-[0.5em] text-white/10">Portfolio 2023 — Present</p>
+	</div>
+	<div class="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 rotate-90 origin-center">
+		<p class="text-[9px] uppercase tracking-[0.5em] text-white/10">@sketching_.wid_.heart</p>
 	</div>
 </section>
 
 <style>
-	@keyframes fadeUp {
+	@keyframes lineDown {
+		from { opacity: 0; height: 0; }
+		to { opacity: 1; height: 6rem; }
+	}
+	@keyframes heroReveal {
+		from { opacity: 0; transform: translateY(60px) skewY(2deg); filter: blur(4px); }
+		to { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
+	}
+	@keyframes heroFade {
 		from { opacity: 0; transform: translateY(20px); }
 		to { opacity: 1; transform: translateY(0); }
 	}
-	@keyframes titleReveal {
-		from { opacity: 0; transform: translateY(40px) skewY(2deg); }
-		to { opacity: 1; transform: translateY(0) skewY(0); }
+	@keyframes scrollPulse {
+		0%, 100% { transform: translateY(-100%); }
+		50% { transform: translateY(100%); }
+	}
+	@keyframes float1 {
+		0%, 100% { transform: translateY(0) rotate(0deg); }
+		50% { transform: translateY(-20px) rotate(2deg); }
+	}
+	@keyframes float2 {
+		0%, 100% { transform: translateY(0) rotate(0deg); }
+		50% { transform: translateY(15px) rotate(-3deg); }
+	}
+	@keyframes float3 {
+		0%, 100% { transform: translateY(0) rotate(0deg); }
+		50% { transform: translateY(-12px) rotate(1.5deg); }
 	}
 
-	.animate-fade-up { animation: fadeUp 1s ease-out 0.2s forwards; }
-	.animate-title-1 { animation: titleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
-	.animate-title-2 { animation: titleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; }
-	.animate-title-3 { animation: titleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards; }
-	.animate-subtitle { animation: fadeUp 1s ease-out 1.2s forwards; }
-	.animate-scroll-hint { animation: fadeUp 1s ease-out 1.8s forwards; }
+	.animate-line-down { animation: lineDown 1.2s ease-out 0.2s both; }
+	.animate-hero-sub { animation: heroFade 1s ease-out 0.6s forwards; }
+	.animate-hero-1 { animation: heroReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards; }
+	.animate-hero-2 { animation: heroReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards; }
+	.animate-hero-3 { animation: heroReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; }
+	.animate-hero-meta { animation: heroFade 1s ease-out 1.6s forwards; }
+	.animate-hero-scroll { animation: heroFade 1s ease-out 2.2s forwards; }
+	.animate-scroll-pulse { animation: scrollPulse 2s ease-in-out infinite; }
+	.floating-1 { animation: float1 8s ease-in-out infinite; }
+	.floating-2 { animation: float2 10s ease-in-out infinite 1s; }
+	.floating-3 { animation: float3 7s ease-in-out infinite 2s; }
 
 	@media (max-width: 768px) {
-		@keyframes titleReveal {
-			from { opacity: 0; transform: translateY(30px); }
-			to { opacity: 1; transform: translateY(0); }
-		}
+		.animate-line-down { animation-name: heroFade; }
 	}
 </style>
 
 <script>
-	const heroBg = document.getElementById('hero-bg');
+	const heroImg = document.getElementById('hero-img');
 	const isMobile = window.innerWidth <= 768;
-	
-	if (!isMobile) {
+
+	if (!isMobile && heroImg) {
 		window.addEventListener('scroll', () => {
-			if (heroBg) {
-				const scroll = window.scrollY;
-				heroBg.style.transform = `translateY(${scroll * 0.4}px)`;
+			const scroll = window.scrollY;
+			const vh = window.innerHeight;
+			if (scroll < vh * 1.5) {
+				heroImg.style.transform = 'scale(1.1) translateY(' + (scroll * 0.3) + 'px)';
+				heroImg.style.opacity = String(Math.max(0, 0.15 - scroll / vh * 0.15));
 			}
 		}, { passive: true });
 	}
