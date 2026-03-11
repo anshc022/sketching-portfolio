@@ -158,11 +158,18 @@ const { title } = Astro.props;
 		el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
 	});
 
-	// Scroll reveal
+	// Scroll reveal — low threshold + generous rootMargin for mobile
 	const observer = new IntersectionObserver((entries) => {
 		entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
-	}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+	}, { threshold: 0.01, rootMargin: '0px 0px 50px 0px' });
 	document.querySelectorAll('.reveal, .img-reveal, .line-draw').forEach(el => observer.observe(el));
+
+	// Safety fallback: if any element is still hidden after 4s, force reveal
+	setTimeout(() => {
+		document.querySelectorAll('.reveal:not(.revealed), .img-reveal:not(.revealed), .line-draw:not(.revealed)').forEach(el => {
+			el.classList.add('revealed');
+		});
+	}, 4000);
 
 	// Noise
 	function generateNoise() {
