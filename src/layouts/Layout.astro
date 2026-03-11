@@ -18,33 +18,45 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+
+		<!-- Theme detection: runs before paint to prevent flash -->
+		<script is:inline>
+			(function() {
+				const stored = localStorage.getItem('theme');
+				if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			})();
+		</script>
 	</head>
-	<body class="bg-[#0a0a0a] text-white font-['Inter'] antialiased overflow-x-hidden">
+	<body class="bg-[#faf9f6] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-white font-['Inter'] antialiased overflow-x-hidden transition-colors duration-500">
 		<!-- Custom cursor (desktop only) -->
 		<div class="custom-cursor hidden md:block" id="cursor-dot"></div>
 		<div class="custom-cursor-ring hidden md:block" id="cursor-ring"></div>
 		
 		<!-- Noise texture overlay -->
-		<div class="fixed inset-0 pointer-events-none z-[9999] opacity-[0.025]" id="noise"></div>
+		<div class="fixed inset-0 pointer-events-none z-[9999] opacity-[0.015] dark:opacity-[0.025]" id="noise"></div>
 		
 		<!-- Page loader -->
-		<div class="fixed inset-0 z-[100] bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-700" id="loader">
+		<div class="fixed inset-0 z-[100] bg-[#faf9f6] dark:bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-700" id="loader">
 			<div class="text-center">
-				<div class="w-12 h-[1px] bg-white/30 mx-auto mb-6 origin-left animate-loader-line"></div>
-				<p class="text-[10px] uppercase tracking-[0.5em] text-white/30">Loading</p>
+				<div class="w-12 h-[1px] bg-[#1a1a1a]/30 dark:bg-white/30 mx-auto mb-6 origin-left animate-loader-line"></div>
+				<p class="text-[10px] uppercase tracking-[0.5em] text-[#1a1a1a]/30 dark:text-white/30">Loading</p>
 			</div>
 		</div>
 
 		<slot />
 
 		<!-- Lightbox -->
-		<div class="fixed inset-0 z-[80] bg-black/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center p-4 md:p-12" id="lightbox">
+		<div class="fixed inset-0 z-[80] bg-black/90 dark:bg-black/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center p-4 md:p-12" id="lightbox">
 			<button class="absolute top-6 right-6 w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors z-10" id="lightbox-close">
 				<svg class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
 			</button>
 			<img src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" id="lightbox-img" />
 			<div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
-				<p class="text-lg font-['Playfair_Display',serif]" id="lightbox-title"></p>
+				<p class="text-lg font-['Playfair_Display',serif] text-white" id="lightbox-title"></p>
 				<p class="text-[10px] uppercase tracking-[0.3em] text-white/30 mt-1" id="lightbox-cat"></p>
 			</div>
 		</div>
@@ -57,115 +69,65 @@ const { title } = Astro.props;
 	}
 
 	::selection {
+		background: rgba(251, 191, 36, 0.2);
+	}
+	.dark ::selection {
 		background: rgba(255, 255, 255, 0.15);
 		color: white;
 	}
 
-	::-webkit-scrollbar {
-		width: 4px;
-	}
-	::-webkit-scrollbar-track {
-		background: #0a0a0a;
-	}
-	::-webkit-scrollbar-thumb {
-		background: rgba(255,255,255,0.15);
-		border-radius: 2px;
-	}
+	::-webkit-scrollbar { width: 4px; }
+	::-webkit-scrollbar-track { background: #faf9f6; }
+	::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+	.dark ::-webkit-scrollbar-track { background: #0a0a0a; }
+	.dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
 
 	/* Custom cursor */
 	.custom-cursor {
-		width: 6px;
-		height: 6px;
-		background: white;
-		border-radius: 50%;
-		position: fixed;
-		top: 0;
-		left: 0;
-		pointer-events: none;
-		z-index: 9998;
-		transition: transform 0.1s;
+		width: 6px; height: 6px; background: #1a1a1a; border-radius: 50%;
+		position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transition: transform 0.1s;
 	}
+	.dark .custom-cursor { background: white; }
 	.custom-cursor-ring {
-		width: 40px;
-		height: 40px;
-		border: 1px solid rgba(255,255,255,0.2);
-		border-radius: 50%;
-		position: fixed;
-		top: 0;
-		left: 0;
-		pointer-events: none;
-		z-index: 9997;
+		width: 40px; height: 40px; border: 1px solid rgba(0,0,0,0.15); border-radius: 50%;
+		position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
 		transition: transform 0.15s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
 		transform: translate(-50%, -50%);
 	}
-	.cursor-hover .custom-cursor-ring {
-		width: 60px;
-		height: 60px;
-		border-color: rgba(255,255,255,0.4);
-	}
-	.cursor-hover .custom-cursor {
-		transform: scale(2);
-	}
+	.dark .custom-cursor-ring { border-color: rgba(255,255,255,0.2); }
+	.cursor-hover .custom-cursor-ring { width: 60px; height: 60px; border-color: rgba(0,0,0,0.3); }
+	.dark .cursor-hover .custom-cursor-ring { border-color: rgba(255,255,255,0.4); }
+	.cursor-hover .custom-cursor { transform: scale(2); }
 
 	/* Reveal animations */
 	.reveal {
-		opacity: 0;
-		transform: translateY(40px);
+		opacity: 0; transform: translateY(40px);
 		transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 	}
-	.reveal.revealed {
-		opacity: 1;
-		transform: translateY(0);
-	}
+	.reveal.revealed { opacity: 1; transform: translateY(0); }
 	.reveal-delay-1 { transition-delay: 0.1s; }
 	.reveal-delay-2 { transition-delay: 0.2s; }
 	.reveal-delay-3 { transition-delay: 0.3s; }
 	.reveal-delay-4 { transition-delay: 0.4s; }
 
-	/* Loader */
 	@keyframes loaderLine {
 		0% { transform: scaleX(0); }
 		50% { transform: scaleX(1); }
 		100% { transform: scaleX(0); transform-origin: right; }
 	}
-	.animate-loader-line {
-		animation: loaderLine 1.5s ease-in-out infinite;
-	}
+	.animate-loader-line { animation: loaderLine 1.5s ease-in-out infinite; }
 
-	/* Smooth image reveal */
-	.img-reveal {
-		clip-path: inset(100% 0 0 0);
-		transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1);
-	}
-	.img-reveal.revealed {
-		clip-path: inset(0 0 0 0);
-	}
+	.img-reveal { clip-path: inset(100% 0 0 0); transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1); }
+	.img-reveal.revealed { clip-path: inset(0 0 0 0); }
 
-	/* Marquee */
-	@keyframes marquee {
-		0% { transform: translateX(0); }
-		100% { transform: translateX(-50%); }
-	}
-	.animate-marquee {
-		animation: marquee 30s linear infinite;
-	}
-	.animate-marquee:hover {
-		animation-play-state: paused;
-	}
+	@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+	.animate-marquee { animation: marquee 30s linear infinite; }
+	.animate-marquee:hover { animation-play-state: paused; }
 
-	/* Magnetic button effect */
-	.magnetic-btn {
-		transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-	}
+	.magnetic-btn { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
-	/* Line draw */
-	.line-draw {
-		width: 0;
-		transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-	}
-	.line-draw.revealed {
-		width: 100%;
-	}
+	.line-draw { width: 0; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+	.line-draw.revealed { width: 100%; }
 </style>
 
 <script>
@@ -173,41 +135,24 @@ const { title } = Astro.props;
 	window.addEventListener('load', () => {
 		const loader = document.getElementById('loader');
 		setTimeout(() => {
-			if (loader) {
-				loader.style.opacity = '0';
-				loader.style.pointerEvents = 'none';
-				setTimeout(() => loader.remove(), 700);
-			}
+			if (loader) { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; setTimeout(() => loader.remove(), 700); }
 		}, 800);
 	});
 
 	// Custom cursor
 	const dot = document.getElementById('cursor-dot');
 	const ring = document.getElementById('cursor-ring');
-	let mouseX = 0, mouseY = 0;
-	let ringX = 0, ringY = 0;
-
+	let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 	document.addEventListener('mousemove', (e) => {
-		mouseX = e.clientX;
-		mouseY = e.clientY;
-		if (dot) {
-			dot.style.left = mouseX - 3 + 'px';
-			dot.style.top = mouseY - 3 + 'px';
-		}
+		mouseX = e.clientX; mouseY = e.clientY;
+		if (dot) { dot.style.left = mouseX - 3 + 'px'; dot.style.top = mouseY - 3 + 'px'; }
 	});
-
 	function animateRing() {
-		ringX += (mouseX - ringX) * 0.15;
-		ringY += (mouseY - ringY) * 0.15;
-		if (ring) {
-			ring.style.left = ringX + 'px';
-			ring.style.top = ringY + 'px';
-		}
+		ringX += (mouseX - ringX) * 0.15; ringY += (mouseY - ringY) * 0.15;
+		if (ring) { ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px'; }
 		requestAnimationFrame(animateRing);
 	}
 	animateRing();
-
-	// Hover effect on interactive elements
 	document.querySelectorAll('a, button, .bento-card, .cursor-interact').forEach(el => {
 		el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
 		el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -215,67 +160,54 @@ const { title } = Astro.props;
 
 	// Scroll reveal
 	const observer = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add('revealed');
-			}
-		});
+		entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
 	}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
 	document.querySelectorAll('.reveal, .img-reveal, .line-draw').forEach(el => observer.observe(el));
 
-	// Noise texture
+	// Noise
 	function generateNoise() {
-		const canvas = document.createElement('canvas');
-		canvas.width = 200;
-		canvas.height = 200;
-		const ctx = canvas.getContext('2d');
-		if (!ctx) return;
-		const imageData = ctx.createImageData(200, 200);
-		for (let i = 0; i < imageData.data.length; i += 4) {
-			const v = Math.random() * 255;
-			imageData.data[i] = v;
-			imageData.data[i + 1] = v;
-			imageData.data[i + 2] = v;
-			imageData.data[i + 3] = 255;
-		}
-		ctx.putImageData(imageData, 0, 0);
-		const noise = document.getElementById('noise');
-		if (noise) noise.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
+		const c = document.createElement('canvas'); c.width = 200; c.height = 200;
+		const ctx = c.getContext('2d'); if (!ctx) return;
+		const d = ctx.createImageData(200, 200);
+		for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = v; d.data[i+1] = v; d.data[i+2] = v; d.data[i+3] = 255; }
+		ctx.putImageData(d, 0, 0);
+		const n = document.getElementById('noise'); if (n) n.style.backgroundImage = 'url(' + c.toDataURL() + ')';
 	}
 	generateNoise();
 
 	// Lightbox
 	const lightbox = document.getElementById('lightbox');
-	const lightboxImg = document.getElementById('lightbox-img');
+	const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
 	const lightboxTitle = document.getElementById('lightbox-title');
 	const lightboxCat = document.getElementById('lightbox-cat');
 	const lightboxClose = document.getElementById('lightbox-close');
-
 	document.querySelectorAll('[data-lightbox]').forEach(el => {
 		el.addEventListener('click', () => {
-			const src = el.getAttribute('data-lightbox');
-			const title = el.getAttribute('data-title') || '';
-			const cat = el.getAttribute('data-category') || '';
-			if (lightboxImg) lightboxImg.src = src;
-			if (lightboxTitle) lightboxTitle.textContent = title;
-			if (lightboxCat) lightboxCat.textContent = cat;
-			if (lightbox) {
-				lightbox.classList.remove('opacity-0', 'pointer-events-none');
-				lightbox.classList.add('opacity-100', 'pointer-events-auto');
-			}
+			if (lightboxImg) lightboxImg.src = el.getAttribute('data-lightbox') || '';
+			if (lightboxTitle) lightboxTitle.textContent = el.getAttribute('data-title') || '';
+			if (lightboxCat) lightboxCat.textContent = el.getAttribute('data-category') || '';
+			if (lightbox) { lightbox.classList.remove('opacity-0','pointer-events-none'); lightbox.classList.add('opacity-100','pointer-events-auto'); }
 			document.body.style.overflow = 'hidden';
 		});
 	});
-
 	function closeLightbox() {
-		if (lightbox) {
-			lightbox.classList.add('opacity-0', 'pointer-events-none');
-			lightbox.classList.remove('opacity-100', 'pointer-events-auto');
-		}
+		if (lightbox) { lightbox.classList.add('opacity-0','pointer-events-none'); lightbox.classList.remove('opacity-100','pointer-events-auto'); }
 		document.body.style.overflow = '';
 	}
 	lightboxClose?.addEventListener('click', closeLightbox);
 	lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 	document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+	// Theme toggle
+	window.toggleTheme = function() {
+		const html = document.documentElement;
+		const isDark = html.classList.contains('dark');
+		if (isDark) {
+			html.classList.remove('dark');
+			localStorage.setItem('theme', 'light');
+		} else {
+			html.classList.add('dark');
+			localStorage.setItem('theme', 'dark');
+		}
+	};
 </script>

@@ -7,24 +7,23 @@ const navItems = [
 ];
 ---
 
-<!-- Mobile menu overlay — OUTSIDE nav to avoid clipping -->
-<div class="fixed inset-0 w-full h-full bg-[#0a0a0a] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 md:hidden" id="mobile-menu" style="z-index: 9990;">
+<!-- Mobile menu overlay -->
+<div class="fixed inset-0 w-full h-full bg-[#faf9f6] dark:bg-[#0a0a0a] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 md:hidden" id="mobile-menu" style="z-index: 9990;">
 	<div class="flex flex-col items-center gap-10">
 		{navItems.map((item, i) => (
 			<a href={item.href}
-				class="mobile-nav-link text-3xl font-['Playfair_Display',serif] text-white/70 hover:text-amber-400 transition-colors tracking-wider"
-				style={`transition-delay: ${i * 80}ms;`}>
+				class="mobile-nav-link text-3xl font-['Playfair_Display',serif] text-[#1a1a1a]/70 dark:text-white/70 hover:text-amber-500 dark:hover:text-amber-400 transition-colors tracking-wider">
 				{item.label}
 			</a>
 		))}
 	</div>
 	<div class="mt-14 flex flex-col items-center gap-5">
 		<a href="https://www.instagram.com/sketching_.wid_.heart" target="_blank" rel="noopener"
-			class="text-[11px] uppercase tracking-[0.3em] text-amber-400/60 hover:text-amber-400 transition-colors">
+			class="text-[11px] uppercase tracking-[0.3em] text-amber-500/60 dark:text-amber-400/60 hover:text-amber-500 dark:hover:text-amber-400 transition-colors">
 			@sketching_.wid_.heart
 		</a>
 		<a href="https://www.instagram.com/varsha.r_.o" target="_blank" rel="noopener"
-			class="text-[11px] uppercase tracking-[0.3em] text-white/30 hover:text-white/60 transition-colors">
+			class="text-[11px] uppercase tracking-[0.3em] text-[#1a1a1a]/30 dark:text-white/30 hover:text-[#1a1a1a]/60 dark:hover:text-white/60 transition-colors">
 			Personal IG
 		</a>
 	</div>
@@ -32,7 +31,7 @@ const navItems = [
 
 <nav class="fixed top-0 left-0 w-full transition-all duration-500" id="navbar" style="z-index: 9995;">
 	<div class="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
-		<a href="#home" class="font-['Playfair_Display',serif] text-lg md:text-xl tracking-wider text-white/90 hover:text-white transition-colors">
+		<a href="#home" class="font-['Playfair_Display',serif] text-lg md:text-xl tracking-wider text-[#1a1a1a]/90 dark:text-white/90 hover:text-[#1a1a1a] dark:hover:text-white transition-colors">
 			S.W.H
 		</a>
 
@@ -40,24 +39,32 @@ const navItems = [
 		<div class="hidden md:flex items-center gap-10">
 			{navItems.map(item => (
 				<a href={item.href}
-					class="text-[11px] uppercase tracking-[0.3em] text-white/50 hover:text-white transition-all duration-300 relative group">
+					class="text-[11px] uppercase tracking-[0.3em] text-[#1a1a1a]/50 dark:text-white/50 hover:text-[#1a1a1a] dark:hover:text-white transition-all duration-300 relative group">
 					{item.label}
-					<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-amber-400 to-orange-400 group-hover:w-full transition-all duration-300"></span>
+					<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-amber-500 to-orange-400 dark:from-amber-400 dark:to-orange-400 group-hover:w-full transition-all duration-300"></span>
 				</a>
 			))}
 		</div>
 
-		<div class="flex items-center gap-4">
+		<div class="flex items-center gap-3 md:gap-4">
+			<!-- Theme toggle -->
+			<button onclick="toggleTheme()" class="w-9 h-9 rounded-full border border-[#1a1a1a]/10 dark:border-white/10 flex items-center justify-center hover:bg-[#1a1a1a]/5 dark:hover:bg-white/5 transition-all" id="theme-toggle" aria-label="Toggle theme">
+				<!-- Sun icon (shown in dark mode) -->
+				<svg class="w-4 h-4 hidden dark:block text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke-width="1.5"/><path stroke-linecap="round" stroke-width="1.5" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+				<!-- Moon icon (shown in light mode) -->
+				<svg class="w-4 h-4 block dark:hidden text-[#1a1a1a]/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+			</button>
+
 			<a href="https://www.instagram.com/sketching_.wid_.heart" target="_blank" rel="noopener"
-				class="hidden md:inline-flex text-[11px] uppercase tracking-[0.3em] text-white/50 hover:text-amber-400 transition-colors">
+				class="hidden md:inline-flex text-[11px] uppercase tracking-[0.3em] text-[#1a1a1a]/50 dark:text-white/50 hover:text-amber-500 dark:hover:text-amber-400 transition-colors">
 				IG
 			</a>
 
 			<!-- Mobile hamburger -->
 			<button class="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-[5px]" id="menu-toggle" aria-label="Toggle menu">
-				<span class="w-5 h-[1.5px] bg-white/70 transition-all duration-300 origin-center" id="bar1"></span>
-				<span class="w-5 h-[1.5px] bg-white/70 transition-all duration-300" id="bar2"></span>
-				<span class="w-3.5 h-[1.5px] bg-white/70 transition-all duration-300 origin-center" id="bar3"></span>
+				<span class="w-5 h-[1.5px] bg-[#1a1a1a]/70 dark:bg-white/70 transition-all duration-300 origin-center" id="bar1"></span>
+				<span class="w-5 h-[1.5px] bg-[#1a1a1a]/70 dark:bg-white/70 transition-all duration-300" id="bar2"></span>
+				<span class="w-3.5 h-[1.5px] bg-[#1a1a1a]/70 dark:bg-white/70 transition-all duration-300 origin-center" id="bar3"></span>
 			</button>
 		</div>
 	</div>
@@ -74,47 +81,29 @@ const navItems = [
 
 	function closeMenu() {
 		menuOpen = false;
-		if (mobileMenu) {
-			mobileMenu.style.opacity = '0';
-			mobileMenu.style.pointerEvents = 'none';
-		}
+		if (mobileMenu) { mobileMenu.style.opacity = '0'; mobileMenu.style.pointerEvents = 'none'; }
 		bar1?.classList.remove('rotate-45', 'translate-y-[6.5px]');
 		bar2?.classList.remove('opacity-0');
 		bar3?.classList.remove('-rotate-45', '-translate-y-[6.5px]', 'w-5');
 		document.body.style.overflow = '';
 	}
-
 	function openMenu() {
 		menuOpen = true;
-		if (mobileMenu) {
-			mobileMenu.style.opacity = '1';
-			mobileMenu.style.pointerEvents = 'auto';
-		}
+		if (mobileMenu) { mobileMenu.style.opacity = '1'; mobileMenu.style.pointerEvents = 'auto'; }
 		bar1?.classList.add('rotate-45', 'translate-y-[6.5px]');
 		bar2?.classList.add('opacity-0');
 		bar3?.classList.add('-rotate-45', '-translate-y-[6.5px]', 'w-5');
 		document.body.style.overflow = 'hidden';
 	}
-
-	menuToggle?.addEventListener('click', () => {
-		menuOpen ? closeMenu() : openMenu();
-	});
-
-	// Close menu on nav link click
-	document.querySelectorAll('.mobile-nav-link').forEach(link => {
-		link.addEventListener('click', closeMenu);
-	});
-
-	// Close on escape
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape' && menuOpen) closeMenu();
-	});
+	menuToggle?.addEventListener('click', () => { menuOpen ? closeMenu() : openMenu(); });
+	document.querySelectorAll('.mobile-nav-link').forEach(link => { link.addEventListener('click', closeMenu); });
+	document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) closeMenu(); });
 
 	window.addEventListener('scroll', () => {
 		if (window.scrollY > 100) {
-			navbar?.classList.add('bg-[#0a0a0a]/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
+			navbar?.classList.add('bg-[#faf9f6]/80', 'dark:bg-[#0a0a0a]/80', 'backdrop-blur-xl', 'border-b', 'border-[#1a1a1a]/5', 'dark:border-white/5');
 		} else {
-			navbar?.classList.remove('bg-[#0a0a0a]/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
+			navbar?.classList.remove('bg-[#faf9f6]/80', 'dark:bg-[#0a0a0a]/80', 'backdrop-blur-xl', 'border-b', 'border-[#1a1a1a]/5', 'dark:border-white/5');
 		}
 	});
 </script>

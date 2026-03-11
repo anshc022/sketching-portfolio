@@ -2,11 +2,11 @@
 ---
 
 <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-	<!-- Parallax background with multiple layers -->
+	<!-- Parallax background -->
 	<div class="absolute inset-0" id="hero-bg">
-		<img src="/artworks/sketch_07.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-15 scale-110" id="hero-img" />
-		<div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/20 to-[#0a0a0a]"></div>
-		<div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]/50"></div>
+		<img src="/artworks/sketch_07.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-10 dark:opacity-15 scale-110" id="hero-img" />
+		<div class="absolute inset-0 bg-gradient-to-b from-[#faf9f6]/60 via-[#faf9f6]/20 to-[#faf9f6] dark:from-[#0a0a0a]/60 dark:via-[#0a0a0a]/20 dark:to-[#0a0a0a]"></div>
+		<div class="absolute inset-0 bg-gradient-to-r from-[#faf9f6]/50 via-transparent to-[#faf9f6]/50 dark:from-[#0a0a0a]/50 dark:via-transparent dark:to-[#0a0a0a]/50"></div>
 	</div>
 
 	<!-- Floating sketch fragments -->
@@ -24,25 +24,24 @@
 
 	<!-- Content -->
 	<div class="relative z-10 text-center px-4 md:px-6">
-		<!-- Decorative line -->
-		<div class="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent via-amber-400/40 to-amber-400/20 mx-auto mb-8 animate-line-down"></div>
+		<div class="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent via-amber-500/40 to-amber-500/20 dark:via-amber-400/40 dark:to-amber-400/20 mx-auto mb-8 animate-line-down"></div>
 		
-		<p class="text-[10px] md:text-[11px] uppercase tracking-[0.5em] md:tracking-[0.6em] text-amber-400/40 mb-6 md:mb-8 opacity-0 animate-hero-sub">
+		<p class="text-[10px] md:text-[11px] uppercase tracking-[0.5em] md:tracking-[0.6em] text-amber-600/50 dark:text-amber-400/40 mb-6 md:mb-8 opacity-0 animate-hero-sub">
 			Art Portfolio — Est. 2023
 		</p>
 		
 		<h1 class="leading-[0.85] mb-6 md:mb-8">
 			<span class="block text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-bold opacity-0 animate-hero-1 tracking-tight">Sketching</span>
-			<span class="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal italic text-amber-400/30 opacity-0 animate-hero-2 mt-2 font-['Playfair_Display',serif]">with</span>
+			<span class="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal italic text-amber-600/40 dark:text-amber-400/30 opacity-0 animate-hero-2 mt-2 font-['Playfair_Display',serif]">with</span>
 			<span class="block text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-bold opacity-0 animate-hero-3 tracking-tight">Heart</span>
 		</h1>
 		
 		<div class="flex items-center justify-center gap-4 md:gap-6 mt-8 opacity-0 animate-hero-meta">
-			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white/20">Graphite</span>
-			<span class="w-1 h-1 rounded-full bg-amber-400/30"></span>
-			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white/20">Charcoal</span>
-			<span class="w-1 h-1 rounded-full bg-amber-400/30"></span>
-			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white/20">by Varsha</span>
+			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-[#1a1a1a]/25 dark:text-white/20">Graphite</span>
+			<span class="w-1 h-1 rounded-full bg-amber-500/30 dark:bg-amber-400/30"></span>
+			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-[#1a1a1a]/25 dark:text-white/20">Charcoal</span>
+			<span class="w-1 h-1 rounded-full bg-amber-500/30 dark:bg-amber-400/30"></span>
+			<span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-[#1a1a1a]/25 dark:text-white/20">by Varsha</span>
 		</div>
 	</div>
 
@@ -50,50 +49,29 @@
 	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-hero-scroll">
 		<div class="flex flex-col items-center gap-3">
 			<div class="w-[1px] h-10 md:h-14 relative overflow-hidden">
-				<div class="absolute top-0 w-full h-full bg-gradient-to-b from-amber-400/50 to-transparent animate-scroll-pulse"></div>
+				<div class="absolute top-0 w-full h-full bg-gradient-to-b from-amber-500/50 dark:from-amber-400/50 to-transparent animate-scroll-pulse"></div>
 			</div>
-			<p class="text-[9px] uppercase tracking-[0.4em] text-white/15">Scroll</p>
+			<p class="text-[9px] uppercase tracking-[0.4em] text-[#1a1a1a]/15 dark:text-white/15">Scroll</p>
 		</div>
 	</div>
 
 	<!-- Side text -->
 	<div class="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
-		<p class="text-[9px] uppercase tracking-[0.5em] text-white/10">Portfolio 2023 — Present</p>
+		<p class="text-[9px] uppercase tracking-[0.5em] text-[#1a1a1a]/10 dark:text-white/10">Portfolio 2023 — Present</p>
 	</div>
 	<div class="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 rotate-90 origin-center">
-		<p class="text-[9px] uppercase tracking-[0.5em] text-white/10">@sketching_.wid_.heart</p>
+		<p class="text-[9px] uppercase tracking-[0.5em] text-[#1a1a1a]/10 dark:text-white/10">@sketching_.wid_.heart</p>
 	</div>
 </section>
 
 <style>
-	@keyframes lineDown {
-		from { opacity: 0; height: 0; }
-		to { opacity: 1; height: 6rem; }
-	}
-	@keyframes heroReveal {
-		from { opacity: 0; transform: translateY(60px) skewY(2deg); filter: blur(4px); }
-		to { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
-	}
-	@keyframes heroFade {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
-	@keyframes scrollPulse {
-		0%, 100% { transform: translateY(-100%); }
-		50% { transform: translateY(100%); }
-	}
-	@keyframes float1 {
-		0%, 100% { transform: translateY(0) rotate(0deg); }
-		50% { transform: translateY(-20px) rotate(2deg); }
-	}
-	@keyframes float2 {
-		0%, 100% { transform: translateY(0) rotate(0deg); }
-		50% { transform: translateY(15px) rotate(-3deg); }
-	}
-	@keyframes float3 {
-		0%, 100% { transform: translateY(0) rotate(0deg); }
-		50% { transform: translateY(-12px) rotate(1.5deg); }
-	}
+	@keyframes lineDown { from { opacity: 0; height: 0; } to { opacity: 1; height: 6rem; } }
+	@keyframes heroReveal { from { opacity: 0; transform: translateY(60px) skewY(2deg); filter: blur(4px); } to { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); } }
+	@keyframes heroFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+	@keyframes scrollPulse { 0%, 100% { transform: translateY(-100%); } 50% { transform: translateY(100%); } }
+	@keyframes float1 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+	@keyframes float2 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(15px) rotate(-3deg); } }
+	@keyframes float3 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(1.5deg); } }
 
 	.animate-line-down { animation: lineDown 1.2s ease-out 0.2s both; }
 	.animate-hero-sub { animation: heroFade 1s ease-out 0.6s forwards; }
@@ -106,20 +84,15 @@
 	.floating-1 { animation: float1 8s ease-in-out infinite; }
 	.floating-2 { animation: float2 10s ease-in-out infinite 1s; }
 	.floating-3 { animation: float3 7s ease-in-out infinite 2s; }
-
-	@media (max-width: 768px) {
-		.animate-line-down { animation-name: heroFade; }
-	}
+	@media (max-width: 768px) { .animate-line-down { animation-name: heroFade; } }
 </style>
 
 <script>
 	const heroImg = document.getElementById('hero-img');
 	const isMobile = window.innerWidth <= 768;
-
 	if (!isMobile && heroImg) {
 		window.addEventListener('scroll', () => {
-			const scroll = window.scrollY;
-			const vh = window.innerHeight;
+			const scroll = window.scrollY; const vh = window.innerHeight;
 			if (scroll < vh * 1.5) {
 				heroImg.style.transform = 'scale(1.1) translateY(' + (scroll * 0.3) + 'px)';
 				heroImg.style.opacity = String(Math.max(0, 0.15 - scroll / vh * 0.15));
