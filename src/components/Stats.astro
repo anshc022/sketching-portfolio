@@ -1,0 +1,57 @@
+---
+---
+
+<!-- Animated stats counter strip -->
+<section class="relative py-16 md:py-20 border-y border-[#1a1a1a]/[0.06] dark:border-white/[0.04] bg-gradient-to-r from-amber-500/[0.02] via-transparent to-amber-500/[0.02] dark:from-amber-400/[0.01] dark:via-transparent dark:to-amber-400/[0.01]">
+	<div class="max-w-[1200px] mx-auto px-4 md:px-8">
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+			{[
+				{ num: 200, suffix: '+', label: 'Artworks Created', sub: 'and counting' },
+				{ num: 50, suffix: '+', label: 'Happy Clients', sub: 'worldwide' },
+				{ num: 5, suffix: '', label: 'Years of Practice', sub: 'dedicated craft' },
+				{ num: 4.9, suffix: '★', label: 'Average Rating', sub: 'client reviews' },
+			].map((stat, i) => (
+				<div class={`reveal reveal-delay-${i + 1} text-center group`}>
+					<div class="stat-counter text-4xl md:text-5xl lg:text-6xl font-['Playfair_Display',serif] font-bold mb-2 text-[#1a1a1a]/70 dark:text-white/60 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-500" data-target={stat.num} data-suffix={stat.suffix}>
+						0{stat.suffix}
+					</div>
+					<p class="text-sm md:text-base font-medium text-[#1a1a1a]/40 dark:text-white/35 mb-1">{stat.label}</p>
+					<p class="text-[10px] uppercase tracking-[0.2em] text-amber-600/30 dark:text-amber-400/20">{stat.sub}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<script>
+	const counters = document.querySelectorAll('.stat-counter');
+	let counted = false;
+
+	function animateCounters() {
+		if (counted) return;
+		counted = true;
+		counters.forEach(counter => {
+			const target = parseFloat(counter.getAttribute('data-target') || '0');
+			const suffix = counter.getAttribute('data-suffix') || '';
+			const isFloat = target % 1 !== 0;
+			const duration = 2000;
+			const start = performance.now();
+
+			function update(now: number) {
+				const elapsed = now - start;
+				const progress = Math.min(elapsed / duration, 1);
+				const eased = 1 - Math.pow(1 - progress, 4);
+				const current = eased * target;
+				counter.textContent = (isFloat ? current.toFixed(1) : Math.floor(current).toString()) + suffix;
+				if (progress < 1) requestAnimationFrame(update);
+			}
+			requestAnimationFrame(update);
+		});
+	}
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => { if (entry.isIntersecting) animateCounters(); });
+	}, { threshold: 0.3 });
+
+	counters.forEach(c => observer.observe(c));
+</script>

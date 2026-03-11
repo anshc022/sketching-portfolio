@@ -1,0 +1,42 @@
+---
+---
+
+<!-- Big typography infinite scroll tape — trending on modern portfolio sites -->
+<div class="relative py-12 md:py-16 overflow-hidden border-y border-[#1a1a1a]/[0.06] dark:border-white/[0.04]">
+	<!-- Row 1: scrolls left -->
+	<div class="flex whitespace-nowrap animate-tape mb-4 md:mb-6">
+		{[...Array(3)].map(() => (
+			<span class="inline-flex items-center">
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] font-bold text-[#1a1a1a]/[0.04] dark:text-white/[0.03] mx-4 md:mx-8 leading-none">Art</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] italic font-bold text-amber-500/[0.08] dark:text-amber-400/[0.06] mx-4 md:mx-8 leading-none">is</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] font-bold text-[#1a1a1a]/[0.04] dark:text-white/[0.03] mx-4 md:mx-8 leading-none">not</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] italic font-bold text-amber-500/[0.08] dark:text-amber-400/[0.06] mx-4 md:mx-8 leading-none">what</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] font-bold text-[#1a1a1a]/[0.04] dark:text-white/[0.03] mx-4 md:mx-8 leading-none">you</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] italic font-bold text-amber-500/[0.08] dark:text-amber-400/[0.06] mx-4 md:mx-8 leading-none">see</span>
+				<span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-amber-500/10 dark:bg-amber-400/8 mx-4 md:mx-8 flex-shrink-0"></span>
+			</span>
+		))}
+	</div>
+
+	<!-- Row 2: scrolls right (reverse), with the rest of the quote -->
+	<div class="flex whitespace-nowrap animate-tape-reverse">
+		{[...Array(3)].map(() => (
+			<span class="inline-flex items-center">
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] font-bold text-[#1a1a1a]/[0.04] dark:text-white/[0.03] mx-4 md:mx-8 leading-none">but</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] italic font-bold text-amber-500/[0.08] dark:text-amber-400/[0.06] mx-4 md:mx-8 leading-none">what</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] font-bold text-[#1a1a1a]/[0.04] dark:text-white/[0.03] mx-4 md:mx-8 leading-none">you</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] italic font-bold text-amber-500/[0.08] dark:text-amber-400/[0.06] mx-4 md:mx-8 leading-none">make</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] font-bold text-[#1a1a1a]/[0.04] dark:text-white/[0.03] mx-4 md:mx-8 leading-none">others</span>
+				<span class="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-['Playfair_Display',serif] italic font-bold text-amber-500/[0.08] dark:text-amber-400/[0.06] mx-4 md:mx-8 leading-none">see</span>
+				<span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-amber-500/10 dark:bg-amber-400/8 mx-4 md:mx-8 flex-shrink-0"></span>
+			</span>
+		))}
+	</div>
+</div>
+
+<style>
+	@keyframes tape { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
+	@keyframes tape-reverse { 0% { transform: translateX(-33.33%); } 100% { transform: translateX(0); } }
+	.animate-tape { animation: tape 40s linear infinite; }
+	.animate-tape-reverse { animation: tape-reverse 45s linear infinite; }
+</style>

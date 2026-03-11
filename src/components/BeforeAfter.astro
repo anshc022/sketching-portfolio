@@ -1,0 +1,63 @@
+---
+---
+
+<!-- Before / After sketch process reveal — drag the slider -->
+<section class="relative py-20 md:py-32 overflow-hidden">
+	<div class="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
+		<div class="reveal text-center mb-12 md:mb-20">
+			<p class="text-[11px] uppercase tracking-[0.5em] text-amber-600/50 dark:text-amber-400/40 mb-4">From Reference to Art</p>
+			<h2 class="text-4xl md:text-6xl font-bold">The Process</h2>
+		</div>
+
+		<div class="max-w-[900px] mx-auto reveal reveal-delay-1">
+			<div class="ba-container relative aspect-[4/3] rounded-2xl md:rounded-3xl overflow-hidden cursor-col-resize select-none border border-[#1a1a1a]/[0.08] dark:border-white/[0.06]" id="ba-slider">
+				<!-- After (full sketch) — sits behind -->
+				<img src="/artworks/sketch_01.png" alt="Finished sketch" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
+
+				<!-- Before (reference/early stage) — clipped -->
+				<div class="absolute inset-0 overflow-hidden" id="ba-before" style="width: 50%;">
+					<img src="/artworks/sketch_05.png" alt="Reference photo" class="absolute inset-0 w-full h-full object-cover" style="min-width: 100%; width: auto;" draggable="false" />
+					<!-- Label -->
+					<div class="absolute bottom-4 left-4 md:bottom-6 md:left-6 bg-black/30 backdrop-blur-md text-white/70 text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">Reference</div>
+				</div>
+
+				<!-- Slider handle -->
+				<div class="absolute top-0 bottom-0 flex items-center justify-center" id="ba-handle" style="left: 50%; transform: translateX(-50%);">
+					<div class="w-[2px] h-full bg-white/60"></div>
+					<div class="absolute w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 dark:bg-white/80 shadow-lg shadow-black/20 flex items-center justify-center backdrop-blur-sm">
+						<svg class="w-5 h-5 text-[#1a1a1a]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+					</div>
+				</div>
+
+				<!-- After label -->
+				<div class="absolute bottom-4 right-4 md:bottom-6 md:right-6 bg-amber-500/30 dark:bg-amber-400/30 backdrop-blur-md text-white/80 text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">Finished</div>
+			</div>
+
+			<p class="text-center text-[11px] text-[#1a1a1a]/20 dark:text-white/15 mt-4 tracking-wider">← Drag to compare →</p>
+		</div>
+	</div>
+</section>
+
+<script>
+	const slider = document.getElementById('ba-slider');
+	const before = document.getElementById('ba-before');
+	const handle = document.getElementById('ba-handle');
+	let isDragging = false;
+
+	function updateSlider(x: number) {
+		if (!slider || !before || !handle) return;
+		const rect = slider.getBoundingClientRect();
+		let pct = ((x - rect.left) / rect.width) * 100;
+		pct = Math.max(2, Math.min(98, pct));
+		before.style.width = pct + '%';
+		handle.style.left = pct + '%';
+	}
+
+	slider?.addEventListener('mousedown', (e) => { isDragging = true; updateSlider(e.clientX); });
+	document.addEventListener('mousemove', (e) => { if (isDragging) { e.preventDefault(); updateSlider(e.clientX); } });
+	document.addEventListener('mouseup', () => { isDragging = false; });
+
+	slider?.addEventListener('touchstart', (e) => { isDragging = true; updateSlider(e.touches[0].clientX); }, { passive: true });
+	document.addEventListener('touchmove', (e) => { if (isDragging) updateSlider(e.touches[0].clientX); }, { passive: true });
+	document.addEventListener('touchend', () => { isDragging = false; });
+</script>

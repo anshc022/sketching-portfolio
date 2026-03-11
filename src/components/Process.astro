@@ -1,0 +1,42 @@
+---
+---
+
+<!-- Creative process — numbered steps with connecting line -->
+<section class="relative py-20 md:py-32 overflow-hidden">
+	<div class="max-w-[900px] mx-auto px-4 md:px-8">
+		<div class="reveal text-center mb-14 md:mb-20">
+			<p class="text-[11px] uppercase tracking-[0.5em] text-amber-600/50 dark:text-amber-400/40 mb-4">How It Works</p>
+			<h2 class="text-4xl md:text-6xl font-bold">Creative Journey</h2>
+		</div>
+
+		<div class="relative">
+			<!-- Vertical connecting line -->
+			<div class="absolute left-6 md:left-8 top-0 bottom-0 w-[1px] bg-gradient-to-b from-amber-500/20 via-amber-500/10 dark:from-amber-400/15 dark:via-amber-400/8 to-transparent"></div>
+
+			{[
+				{ step: '01', title: 'Share Your Vision', desc: 'Send me your reference photos and tell me what makes this piece special to you. Every detail matters — the lighting, the emotion, the story.', icon: '💭' },
+				{ step: '02', title: 'Rough Composition', desc: 'I create initial thumbnail sketches exploring different compositions. We pick the one that captures the essence of your vision.', icon: '✏️' },
+				{ step: '03', title: 'Detailed Underlay', desc: 'Light guidelines map out proportions and placement. This invisible framework is what separates good art from great art.', icon: '📐' },
+				{ step: '04', title: 'Layer by Layer', desc: 'Building depth through progressive layering — light tones first, then mid-tones, finally the rich darks that bring everything to life.', icon: '🎨' },
+				{ step: '05', title: 'Final Details', desc: 'The magic stage. Highlights, texture refinements, and those tiny details that make people say "wait, that\'s a drawing?"', icon: '✨' },
+				{ step: '06', title: 'Delivered to You', desc: 'Your finished piece, carefully packaged with a high-res digital scan. Ready to frame, gift, or admire forever.', icon: '🎁' },
+			].map((s, i) => (
+				<div class={`reveal reveal-delay-${Math.min(i + 1, 4)} relative pl-16 md:pl-20 pb-10 md:pb-14 last:pb-0 group`}>
+					<!-- Step number circle -->
+					<div class="absolute left-0 w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#1a1a1a]/[0.08] dark:border-white/[0.06] bg-[#faf9f6] dark:bg-[#0a0a0a] flex items-center justify-center group-hover:border-amber-500/30 dark:group-hover:border-amber-400/20 transition-all duration-500 z-10">
+						<span class="text-[10px] md:text-xs font-['Space_Mono',monospace] text-[#1a1a1a]/25 dark:text-white/20 group-hover:text-amber-500/60 dark:group-hover:text-amber-400/50 transition-colors duration-500">{s.step}</span>
+					</div>
+
+					<!-- Content -->
+					<div class="pt-1 md:pt-3">
+						<div class="flex items-center gap-3 mb-2 md:mb-3">
+							<span class="text-lg">{s.icon}</span>
+							<h3 class="text-lg md:text-xl font-['Playfair_Display',serif] font-bold">{s.title}</h3>
+						</div>
+						<p class="text-xs md:text-sm leading-[1.8] text-[#1a1a1a]/35 dark:text-white/30">{s.desc}</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
