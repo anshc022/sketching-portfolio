@@ -1,0 +1,37 @@
+---
+---
+
+<!-- Scroll to top button -->
+<button id="scroll-top" aria-label="Scroll to top"
+	class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-11 h-11 md:w-12 md:h-12 rounded-full bg-amber-500/90 dark:bg-amber-400/90 text-white dark:text-[#0a0a0a] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 hover:bg-amber-600 dark:hover:bg-amber-300 hover:scale-110 active:scale-95 shadow-lg shadow-amber-500/20 dark:shadow-amber-400/20"
+	style="z-index: 9980;">
+	<svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+</button>
+
+<!-- Scroll progress bar -->
+<div class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-amber-500 to-orange-400 dark:from-amber-400 dark:to-orange-400 transition-none" id="scroll-progress" style="z-index: 99999; width: 0%;"></div>
+
+<script>
+	const scrollTop = document.getElementById('scroll-top');
+	const scrollProgress = document.getElementById('scroll-progress');
+
+	window.addEventListener('scroll', () => {
+		const scrollY = window.scrollY;
+		const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+		const pct = Math.min((scrollY / docHeight) * 100, 100);
+
+		if (scrollProgress) scrollProgress.style.width = pct + '%';
+
+		if (scrollY > 600) {
+			scrollTop?.classList.remove('opacity-0', 'pointer-events-none');
+			scrollTop?.classList.add('opacity-100', 'pointer-events-auto');
+		} else {
+			scrollTop?.classList.add('opacity-0', 'pointer-events-none');
+			scrollTop?.classList.remove('opacity-100', 'pointer-events-auto');
+		}
+	}, { passive: true });
+
+	scrollTop?.addEventListener('click', () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	});
+</script>

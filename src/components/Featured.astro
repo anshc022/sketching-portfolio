@@ -1,0 +1,69 @@
+---
+---
+
+<!-- Featured artwork spotlight -->
+<section class="relative py-20 md:py-32 overflow-hidden">
+	<!-- Large background text -->
+	<div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+		<span class="text-[12rem] sm:text-[18rem] md:text-[25rem] font-['Playfair_Display',serif] font-bold text-[#1a1a1a]/[0.02] dark:text-white/[0.02] select-none leading-none whitespace-nowrap">Featured</span>
+	</div>
+
+	<div class="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 relative">
+		<div class="grid md:grid-cols-2 gap-6 md:gap-12 items-center">
+			<!-- Image side -->
+			<div class="relative reveal">
+				<div class="aspect-[4/5] rounded-xl md:rounded-2xl overflow-hidden img-reveal cursor-pointer"
+					data-lightbox="/artworks/sketch_01.png" data-title="Portrait Study" data-category="Featured Work">
+					<img src="/artworks/sketch_01.png" alt="Featured artwork" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+				</div>
+				<!-- Floating badge -->
+				<div class="absolute -top-3 -right-3 md:-top-5 md:-right-5 bg-amber-500 dark:bg-amber-400 text-white dark:text-[#0a0a0a] px-4 py-2 rounded-full text-[10px] uppercase tracking-[0.2em] font-medium shadow-lg shadow-amber-500/30 dark:shadow-amber-400/20">
+					Featured
+				</div>
+				<!-- Frame lines -->
+				<div class="absolute -inset-3 md:-inset-5 border border-[#1a1a1a]/[0.04] dark:border-white/[0.04] rounded-2xl md:rounded-3xl pointer-events-none"></div>
+			</div>
+
+			<!-- Text side -->
+			<div class="md:pl-6">
+				<div class="reveal reveal-delay-1">
+					<span class="text-[10px] font-['Space_Mono',monospace] text-amber-600/30 dark:text-amber-400/25">001</span>
+					<h3 class="text-3xl md:text-5xl lg:text-6xl font-bold mt-2 mb-4 leading-tight">Portrait Study</h3>
+					<div class="h-[1px] w-16 bg-amber-500/30 dark:bg-amber-400/20 mb-6"></div>
+				</div>
+				
+				<div class="reveal reveal-delay-2">
+					<p class="text-sm md:text-[15px] leading-[1.9] text-[#1a1a1a]/40 dark:text-white/35 mb-6">
+						A detailed graphite portrait exploring the interplay of light and shadow across human features. Created using 6B and 8B pencils on cold-pressed paper, this piece represents the core of what sketching means to me — finding beauty in every line.
+					</p>
+
+					<div class="flex flex-wrap gap-2 mb-8">
+						{['Graphite', 'A3 Size', '12 Hours', 'Cold-Pressed'].map(tag => (
+							<span class="px-3 py-1.5 rounded-full bg-[#1a1a1a]/[0.03] dark:bg-white/[0.03] border border-[#1a1a1a]/[0.06] dark:border-white/[0.06] text-[10px] uppercase tracking-[0.15em] text-[#1a1a1a]/30 dark:text-white/25">
+								{tag}
+							</span>
+						))}
+					</div>
+				</div>
+
+				<div class="reveal reveal-delay-3">
+					<div class="flex items-center gap-6 pt-6 border-t border-[#1a1a1a]/5 dark:border-white/5">
+						<div>
+							<span class="block text-2xl md:text-3xl font-['Playfair_Display',serif] font-bold">4.9</span>
+							<div class="flex gap-0.5 mt-1">
+								{[...Array(5)].map(() => (
+									<svg class="w-3 h-3 text-amber-500/60 dark:text-amber-400/50" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+								))}
+							</div>
+						</div>
+						<div class="h-10 w-[1px] bg-[#1a1a1a]/5 dark:bg-white/5"></div>
+						<a href="#commission" class="group inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-amber-600/60 dark:text-amber-400/50 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+							<span>Get one like this</span>
+							<svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
