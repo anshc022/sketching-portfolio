@@ -1,0 +1,23 @@
+---
+interface Props {
+	src: string;
+	alt: string;
+	caption?: string;
+}
+
+const { src, alt, caption } = Astro.props;
+---
+
+<div class="break-inside-avoid mb-8 rounded-sm shadow-xl shadow-black/5 overflow-hidden group bg-white p-2 cursor-pointer">
+	<div class="overflow-hidden">
+		<img
+			src={src}
+			alt={alt}
+			loading="lazy"
+			class="w-full h-auto transition-all duration-500 group-hover:scale-105 group-hover:contrast-110"
+		/>
+	</div>
+	{caption && (
+		<p class="mt-2 text-center text-xs text-black/40 uppercase tracking-widest px-2 pb-1">{caption}</p>
+	)}
+</div>

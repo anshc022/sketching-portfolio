@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About | Sketching with Heart">
+	<Nav />
+	<main class="max-w-4xl mx-auto px-6 py-16">
+		<div class="grid md:grid-cols-2 gap-16 items-start">
+			<div>
+				<div class="aspect-[3/4] bg-gradient-to-b from-gray-50 to-gray-100 rounded-sm shadow-xl shadow-black/5 overflow-hidden">
+					<!-- Artist photo placeholder -->
+					<div class="w-full h-full flex items-center justify-center">
+						<p class="text-black/20 text-xs uppercase tracking-widest">Artist Photo</p>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<h1 class="text-5xl font-['Cormorant_Garamond'] font-semibold mb-6">The Artist</h1>
+				<div class="space-y-4 text-black/60 leading-relaxed text-sm">
+					<p>
+						Every sketch begins with a feeling. I work primarily in graphite and charcoal,
+						drawn to the way simple pencil strokes can capture emotion, light, and life.
+					</p>
+					<p>
+						My journey started with a love for observation — noticing the way shadows fall
+						across a face, how textures shift in natural light, the quiet beauty in
+						everyday moments.
+					</p>
+					<p>
+						Each piece is a conversation between the paper and me. I hope my work speaks to
+						you the way the subjects speak to me.
+					</p>
+				</div>
+
+				<div class="mt-12 pt-8 border-t border-black/5">
+					<h2 class="text-xl font-['Cormorant_Garamond'] mb-6">The Process</h2>
+					<div class="grid grid-cols-3 gap-4">
+						{['Reference', 'Outline', 'Detail'].map((step, i) => (
+							<div class="text-center">
+								<div class="aspect-square bg-gray-50 rounded-sm mb-2 flex items-center justify-center shadow-md shadow-black/5">
+									<span class="text-2xl font-['Cormorant_Garamond'] text-[#8B735B]">{i + 1}</span>
+								</div>
+								<p class="text-xs uppercase tracking-widest text-black/40">{step}</p>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="mt-12">
+					<a href="https://www.instagram.com/sketching_.wid_.heart" target="_blank" rel="noopener"
+						class="inline-block uppercase text-xs tracking-[0.2em] text-[#8B735B] border border-[#8B735B]/30 px-6 py-3 hover:bg-[#8B735B] hover:text-white transition-all duration-300">
+						Follow on Instagram
+					</a>
+				</div>
+			</div>
+		</div>
+	</main>
+	<Footer />
+</Layout>
