@@ -7,24 +7,40 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-[#F5F2ED] text-[#333333] font-['Montserrat'] antialiased">
+	<body class="bg-[#0a0a0a] text-white font-['Inter'] antialiased overflow-x-hidden">
 		<slot />
 	</body>
 </html>
 
 <style is:global>
-	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Cormorant Garamond', serif;
+	h1, h2, h3 {
+		font-family: 'Playfair Display', serif;
+	}
+
+	::-webkit-scrollbar {
+		width: 6px;
+	}
+	::-webkit-scrollbar-track {
+		background: #0a0a0a;
+	}
+	::-webkit-scrollbar-thumb {
+		background: #333;
+		border-radius: 3px;
+	}
+
+	.parallax-section {
+		transform: translateZ(0);
+		will-change: transform;
 	}
 </style>

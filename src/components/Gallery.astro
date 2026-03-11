@@ -1,0 +1,122 @@
+---
+const sketches = [
+	{ id: 1, title: 'Portrait Study I', category: 'Portrait', aspect: '3/4' },
+	{ id: 2, title: 'Eyes of Wonder', category: 'Detail', aspect: '1/1' },
+	{ id: 3, title: 'Landscape Dream', category: 'Landscape', aspect: '4/3' },
+	{ id: 4, title: 'Portrait Study II', category: 'Portrait', aspect: '2/3' },
+	{ id: 5, title: 'Still Life', category: 'Object', aspect: '1/1' },
+	{ id: 6, title: 'Expression', category: 'Portrait', aspect: '3/4' },
+	{ id: 7, title: 'Charcoal Series', category: 'Abstract', aspect: '4/5' },
+	{ id: 8, title: 'Pencil Work', category: 'Detail', aspect: '1/1' },
+];
+---
+
+<!-- Horizontal Scroll Gallery -->
+<section id="gallery" class="relative py-32">
+	<div class="px-8 mb-16">
+		<p class="text-[11px] uppercase tracking-[0.5em] text-white/30 mb-4">Selected Works</p>
+		<h2 class="text-5xl md:text-6xl font-bold">Gallery</h2>
+	</div>
+
+	<div class="relative">
+		<div class="overflow-x-auto pb-8 hide-scrollbar" id="horizontal-scroll">
+			<div class="flex gap-6 px-8" style="width: max-content;">
+				{sketches.map((sketch, i) => (
+					<div class="group relative flex-shrink-0 cursor-pointer"
+						style={`width: ${sketch.aspect === '1/1' ? '350px' : sketch.aspect === '4/3' ? '420px' : '300px'};`}>
+						<div class={`relative overflow-hidden bg-white/5 rounded-lg`}
+							style={`aspect-ratio: ${sketch.aspect};`}>
+							<!-- Placeholder gradient -->
+							<div class="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-white/[0.02]"></div>
+							<div class="absolute inset-0 flex items-center justify-center">
+								<span class="text-white/10 text-xs uppercase tracking-widest">Artwork {sketch.id}</span>
+							</div>
+
+							<!-- Hover overlay -->
+							<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+								<div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+									<p class="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-1">{sketch.category}</p>
+									<p class="text-lg font-['Playfair_Display']">{sketch.title}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- Scroll indicators -->
+		<div class="flex items-center gap-4 px-8 mt-8">
+			<button id="scroll-left" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+				<svg class="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
+			</button>
+			<div class="flex-1 h-[1px] bg-white/10 relative">
+				<div class="h-full bg-white/40 transition-all duration-300" id="scroll-progress" style="width: 0%"></div>
+			</div>
+			<button id="scroll-right" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+				<svg class="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+			</button>
+		</div>
+	</div>
+</section>
+
+<!-- Stacked Card Section -->
+<section class="py-32 px-8">
+	<div class="max-w-7xl mx-auto">
+		<p class="text-[11px] uppercase tracking-[0.5em] text-white/30 mb-4">Featured Pieces</p>
+		<h2 class="text-5xl md:text-6xl font-bold mb-16">Highlights</h2>
+
+		<div class="space-y-8" id="stacked-cards">
+			{[
+				{ title: 'Portrait Collection', desc: 'Capturing emotion through graphite and charcoal. Each face tells a unique story.', count: '12 Pieces' },
+				{ title: 'Nature & Landscapes', desc: 'From delicate flowers to vast horizons — pencil strokes that bring nature to life.', count: '8 Pieces' },
+				{ title: 'Charcoal Series', desc: 'Bold, expressive charcoal work exploring contrast, shadow, and raw emotion.', count: '6 Pieces' },
+			].map((card, i) => (
+				<div class="sticky rounded-2xl border border-white/5 bg-[#111] overflow-hidden group"
+					style={`top: ${120 + i * 60}px;`}>
+					<div class="grid md:grid-cols-2 gap-0">
+						<div class="p-12 md:p-16 flex flex-col justify-center">
+							<p class="text-[10px] uppercase tracking-[0.4em] text-white/30 mb-4">{card.count}</p>
+							<h3 class="text-3xl md:text-4xl font-bold mb-4">{card.title}</h3>
+							<p class="text-white/40 text-sm leading-relaxed mb-8">{card.desc}</p>
+							<a href="#gallery" class="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/60 hover:text-white transition-colors group/link">
+								View Collection
+								<svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+							</a>
+						</div>
+						<div class="aspect-[4/3] md:aspect-auto bg-gradient-to-br from-white/[0.06] to-white/[0.02] flex items-center justify-center">
+							<span class="text-white/10 text-xs uppercase tracking-widest">Preview {i + 1}</span>
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.hide-scrollbar::-webkit-scrollbar { display: none; }
+	.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<script>
+	const container = document.getElementById('horizontal-scroll');
+	const progress = document.getElementById('scroll-progress');
+	const leftBtn = document.getElementById('scroll-left');
+	const rightBtn = document.getElementById('scroll-right');
+
+	container?.addEventListener('scroll', () => {
+		if (container && progress) {
+			const pct = container.scrollLeft / (container.scrollWidth - container.clientWidth) * 100;
+			progress.style.width = `${pct}%`;
+		}
+	});
+
+	leftBtn?.addEventListener('click', () => {
+		container?.scrollBy({ left: -400, behavior: 'smooth' });
+	});
+
+	rightBtn?.addEventListener('click', () => {
+		container?.scrollBy({ left: 400, behavior: 'smooth' });
+	});
+</script>

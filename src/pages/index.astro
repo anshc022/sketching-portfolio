@@ -1,61 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro';
+import About from '../components/About.astro';
+import Commission from '../components/Commission.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Sketching with Heart | Portfolio">
+<Layout title="Sketching with Heart | Varsha's Art Portfolio">
 	<Nav />
-	<main class="max-w-6xl mx-auto px-6 py-16">
-		<section class="text-center mb-20">
-			<h1 class="text-6xl md:text-8xl font-semibold tracking-tight mb-6 font-['Cormorant_Garamond']">
-				Sketching with Heart
-			</h1>
-			<p class="uppercase tracking-[0.25em] text-sm text-[#8B735B] mb-8">
-				Traditional Graphite & Charcoal Art
-			</p>
-			<p class="max-w-xl mx-auto text-black/50 leading-relaxed text-sm">
-				Every stroke tells a story. Explore a collection of hand-drawn portraits,
-				landscapes, and illustrations crafted with passion and precision.
-			</p>
-		</section>
-
-		<section class="mb-16">
-			<h2 class="text-3xl font-['Cormorant_Garamond'] text-center mb-12">Recent Work</h2>
-			<div id="ig-feed" class="columns-1 md:columns-2 lg:columns-3 gap-8">
-				<!-- Populated by IG feed or static images -->
-				<div class="break-inside-avoid mb-8 rounded-sm shadow-xl shadow-black/5 overflow-hidden bg-white p-2">
-					<div class="aspect-[4/5] bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center">
-						<p class="text-black/20 text-xs uppercase tracking-widest">Loading artwork...</p>
-					</div>
-				</div>
-				<div class="break-inside-avoid mb-8 rounded-sm shadow-xl shadow-black/5 overflow-hidden bg-white p-2">
-					<div class="aspect-square bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center">
-						<p class="text-black/20 text-xs uppercase tracking-widest">Loading artwork...</p>
-					</div>
-				</div>
-				<div class="break-inside-avoid mb-8 rounded-sm shadow-xl shadow-black/5 overflow-hidden bg-white p-2">
-					<div class="aspect-[3/4] bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center">
-						<p class="text-black/20 text-xs uppercase tracking-widest">Loading artwork...</p>
-					</div>
-				</div>
-			</div>
-			<div class="text-center mt-12">
-				<a href="/gallery" class="inline-block uppercase text-xs tracking-[0.2em] text-[#8B735B] border border-[#8B735B]/30 px-8 py-3 hover:bg-[#8B735B] hover:text-white transition-all duration-300">
-					View Full Gallery
-				</a>
-			</div>
-		</section>
-
-		<section class="text-center py-16 border-t border-black/5">
-			<h2 class="text-3xl font-['Cormorant_Garamond'] mb-4">Commission a Piece</h2>
-			<p class="text-black/50 text-sm max-w-md mx-auto mb-8">
-				Want a custom portrait or illustration? I'd love to bring your vision to life.
-			</p>
-			<a href="/commission" class="inline-block uppercase text-xs tracking-[0.2em] bg-[#333] text-[#F5F2ED] px-8 py-3 hover:bg-[#8B735B] transition-all duration-300">
-				Get in Touch
-			</a>
-		</section>
-	</main>
+	<Hero />
+	<Gallery />
+	<About />
+	<Commission />
 	<Footer />
 </Layout>
